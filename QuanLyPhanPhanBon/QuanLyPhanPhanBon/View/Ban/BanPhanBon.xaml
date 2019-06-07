@@ -4,17 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyPhanPhanBon.View.Ban"
+             xmlns:BanPhanBonViewModel="clr-namespace:QuanLyPhanPhanBon.ViewModel.BanViewModel"
              mc:Ignorable="d" 
               x:Name="BanUserControl"
              d:DesignHeight="400" d:DesignWidth="1000"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz">
 
+    <UserControl.DataContext>
+        <BanPhanBonViewModel:BanPhanBonViewModel/>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+       
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
@@ -46,6 +50,8 @@
         </StackPanel>
 
         <DataGrid
+            ItemsSource="{Binding ListKH}"
+            SelectedItem="{Binding SelectedKhachHang}"
             Name="DataGridKH"
             Grid.Row="1"
             HorizontalAlignment="Stretch"
@@ -60,33 +66,12 @@
            
             <DataGrid.Columns>
 
-                <!--<DataGridTemplateColumn
-                    Visibility="Collapsed">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <CheckBox
-                                Name="checkBoxDeleteAll"
-                                Checked="CheckBoxHeader_CheckedUnChecked"
-                                Unchecked="CheckBoxHeader_CheckedUnChecked"
-                                HorizontalAlignment="Center" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox
-                                x:Name="checkBoxDelete"
-                                HorizontalAlignment="Center"
-                                IsChecked="{Binding isChecked, Mode=TwoWay}"
-                                Checked="CheckBoxItem_CheckedUnChecked"
-                                Unchecked="CheckBoxItem_CheckedUnChecked"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+               
 
                 <DataGridTextColumn
                     Width="200"
                     Header="Khách hàng"
-                    Binding="{Binding TenKH}"
+                    Binding="{Binding TenKhachHang}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
                 </DataGridTextColumn>
             </DataGrid.Columns>
@@ -104,6 +89,7 @@
 
             <DataGrid
                 IsReadOnly="True"
+                 ItemsSource="{Binding ListPhanBon}"
             SelectedItem="{Binding SelectedPhanBon}"
                 Grid.RowSpan="2"
                 IsEnabled="{Binding isSelectKH}"
@@ -113,7 +99,7 @@
                 VerticalAlignment="Stretch"
                 ColumnWidth="*"
                 CanUserSortColumns="True"
-                 ItemsSource="{Binding PhanBonDataTable}"
+                
                 CanUserAddRows="True"
                 AutoGenerateColumns="False"
              
@@ -156,16 +142,18 @@
                     IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Width="80" Height="80" Source="{Binding HinhAnh}" />
+                                <Image Width="50" Height="50" Source="{Binding HinhAnh}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
-                <DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="decrease" Background="DimGray" BorderBrush="Black" Width="38" Height="20" Command="{Binding GiamSLMua}">
+                        <DataTemplate DataType="BanPhanBonViewModel:BanPhanBonViewModel">
+                            <Button Name="decrease" Background="DimGray" BorderBrush="Black" Width="38" Height="20" 
+                                Command="{Binding Path=DataContext.GiamSLMua, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding IDPhanBon}"   
+                                    >
                                 <materialDesign:PackIcon Width="40" Height="10" HorizontalAlignment="Center" Kind="Minus"></materialDesign:PackIcon>
                             </Button>
                         </DataTemplate>
@@ -177,7 +165,7 @@
                                 Value="Center" />
                         </Style>
                     </DataGridTemplateColumn.CellStyle>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
             </DataGrid>
             <!--</GroupBox>-->
 
@@ -193,6 +181,7 @@
             </Grid>
 
             <GroupBox
+                Background="LightBlue"
                 Foreground="Black"
                 Grid.Column="1"
                 Header="Hóa đơn">
@@ -206,10 +195,10 @@
                         <TextBlock FontSize="15" Text="Khách hàng: "></TextBlock>
                         <TextBlock FontSize="15" Name="customername" FontWeight="Bold" Text="{Binding TenKhachHang}"></TextBlock>
                     </StackPanel>
-                    <ListView Grid.Row="1" Name="ListViewSPMua" Foreground="Black">
+                    <ListView Grid.Row="1" Name="ListViewSPMua">
                         <ListView.View>
                             <GridView  >
-                                <GridViewColumn Header="Tên phân bón" DisplayMemberBinding="{Binding TenPhanBon}"></GridViewColumn>
+                                <GridViewColumn  Header="Tên phân bón" DisplayMemberBinding="{Binding TenPhanBon}"></GridViewColumn>
                                 <GridViewColumn Header="Khuyến mãi (%)" DisplayMemberBinding="{Binding KhuyenMai}"></GridViewColumn>
                                 <GridViewColumn Header="SL" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
                                 <GridViewColumn Header="Giá (VNĐ)" DisplayMemberBinding="{Binding Gia}"></GridViewColumn>
@@ -240,31 +229,13 @@
             </GroupBox>
         </Grid>
 
-
-        <Button
-            x:Name="btnDeleteCustomer"
-           Command="{Binding SelectKH}"
-            Grid.Column="0" Grid.Row="1" 
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Margin="0,0,25,20"
-            Width="50" Height="50"
-            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-            ToolTip="MaterialDesignFloatingActionAccentButton">
-            <materialDesign:PackIcon
-                Name="icondeletebtn"
-                Kind="Delete"
-                Height="24"
-                Width="24" />
-        </Button>
-
         <Button
             x:Name="btnAddCustomer"
             Command="{Binding ThemKH}"
             Grid.Column="0" Grid.Row="1" 
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Margin="0,0,105,20"
+            Margin="0,0,35,20"
             Width="50" Height="50"
             Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
             ToolTip="MaterialDesignFloatingActionAccentButton">

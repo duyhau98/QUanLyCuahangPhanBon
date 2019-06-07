@@ -169,7 +169,7 @@
             Name="DataGridLoaiPhanBon"
             ItemsSource="{Binding listLoaiPhanBon}"
             Grid.ColumnSpan="3" Grid.Row="1"
-            CanUserAddRows="True"
+            CanUserAddRows="False"
             CanUserSortColumns="True"
             
             AutoGenerateColumns="False"

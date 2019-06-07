@@ -39,7 +39,6 @@ C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\Ban
 C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\QuanLy\QuanLyNhanVien.baml
 C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\ThongKe\ThongKe.baml
 C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\Thu\Thu.baml
-C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\QuanLyPhanPhanBon.csprojAssemblyReference.cache
 C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\Nhap\ChinhSuaPhanBon.g.cs
 C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\Nhap\ThemPhanBon.g.cs
 C:\Users\hud\source\repos\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\Nhap\ChinhSuaPhanBon.baml

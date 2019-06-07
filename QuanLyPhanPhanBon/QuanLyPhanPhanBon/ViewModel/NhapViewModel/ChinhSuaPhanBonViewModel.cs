@@ -23,6 +23,7 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             SaveImage = new DelegateCommand(SaveImageClick);
             EditPhanBon = new DelegateCommand(Edit);
             SavePhanBon = new DelegateCommand(Save);
+            ExitThisWindow = new DelegateCommand(Exit);
             FillComboBox();
             if (phanBon!=null)
             {
