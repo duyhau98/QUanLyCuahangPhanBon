@@ -1,0 +1,154 @@
+﻿<Window x:Class="QuanLyPhanPhanBon.View.Nhap.ThemPhanBon"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyPhanPhanBon.View.Nhap"
+        mc:Ignorable="d"
+        Title="Thêm phân bón" Height="500" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="15"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.RowSpan="2">
+            <Grid Height="250">
+                <Grid Width="200" Height="200">
+                    <Border CornerRadius="7" BorderThickness="2" BorderBrush="White">
+                        <Image Source="/Image/noimage.png" Name="HinhAnhSP" Width="200" Height="200" ></Image>
+                    </Border>
+                </Grid>
+            </Grid>
+            <Grid Height="80">
+                <Button
+                    Height="30"
+                    Command="{Binding SaveImage}"
+                    Name="btnAddImage"
+                 
+                    Width="200"
+                    VerticalAlignment="Top"
+                    Content="Thêm ảnh phân bón"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                </Button>
+            </Grid>
+
+
+            
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="0,50,50,0">
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Tên phân bón"></TextBlock>
+                <TextBox
+                    Name="txtMaSP"
+                    Grid.Column="1"
+                    materialDesign:HintAssist.Hint="SP098"
+                    VerticalAlignment="Center">
+                </TextBox>
+            </Grid>
+
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Loại phân bón"></TextBlock>
+                <ComboBox
+                    Name="txtTenSP"
+                    Grid.Column="1"
+                    materialDesign:HintAssist.Hint="Loại phân bón"
+                    VerticalAlignment="Center">
+                </ComboBox>
+            </Grid>
+
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Số lượng"></TextBlock>
+                <TextBox
+                    Name="txtSoLuong"
+                    Grid.Column="1"
+                    VerticalAlignment="Center">
+                </TextBox>
+            </Grid>
+
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Đơn Giá"></TextBlock>
+                <TextBox
+                    Name="txtGia"
+                    Grid.Column="1"
+                    VerticalAlignment="Center">
+                </TextBox>
+            </Grid>
+        </StackPanel>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button 
+                Name="btnSave"
+                Command="{Binding AddPhanBon}"
+                Width="150"
+                Style="{DynamicResource MaterialDesignRaisedButton}"
+                materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                Lưu lại
+            </Button>
+
+            <Button
+                Name="btnExit"
+                Command="{Binding ExitThisWindow}"
+                Width="150"
+                Grid.Column="1"
+                Style="{DynamicResource MaterialDesignRaisedButton}"
+                materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                Thoát
+            </Button>
+        </Grid>
+
+    </Grid>
+</Window>
