@@ -58,7 +58,7 @@
             VerticalAlignment="Stretch"
             ColumnWidth="*"
             CanUserSortColumns="True"
-            CanUserAddRows="True"
+            CanUserAddRows="False"
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ScrollViewer.CanContentScroll="False">
@@ -90,7 +90,7 @@
             <DataGrid
                 IsReadOnly="True"
                  ItemsSource="{Binding ListPhanBon}"
-            SelectedItem="{Binding SelectedPhanBon}"
+                SelectedItem="{Binding SelectedPhanBon}"
                 Grid.RowSpan="2"
                 IsEnabled="{Binding isSelectKH}"
                 Margin="5"
@@ -100,7 +100,7 @@
                 ColumnWidth="*"
                 CanUserSortColumns="True"
                 
-                CanUserAddRows="True"
+                CanUserAddRows="False"
                 AutoGenerateColumns="False"
              
                 ScrollViewer.CanContentScroll="False">
@@ -146,26 +146,26 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
-                </DataGrid.Columns>
-                <!--<DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="BanPhanBonViewModel:BanPhanBonViewModel">
-                            <Button Name="decrease" Background="DimGray" BorderBrush="Black" Width="38" Height="20" 
-                                Command="{Binding Path=DataContext.GiamSLMua, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding IDPhanBon}"   
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="BanPhanBonViewModel:BanPhanBonViewModel">
+                                <Button Name="decrease" Background="DimGray" BorderBrush="Black" Width="38" Height="20" 
+                                Command="{Binding Path=DataContext.GiamSLMua, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding Path =IDPhanBon }"   
                                     >
-                                <materialDesign:PackIcon Width="40" Height="10" HorizontalAlignment="Center" Kind="Minus"></materialDesign:PackIcon>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter
+                                    <materialDesign:PackIcon Width="40" Height="10" HorizontalAlignment="Center" Kind="Minus"></materialDesign:PackIcon>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter
                                 Property="HorizontalAlignment"
                                 Value="Center" />
-                        </Style>
-                    </DataGridTemplateColumn.CellStyle>
-                </DataGridTemplateColumn>-->
+                            </Style>
+                        </DataGridTemplateColumn.CellStyle>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                
             </DataGrid>
             <!--</GroupBox>-->
 

@@ -193,9 +193,9 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
                                             //disbale selected row
                                             _selectedPhanBon = null;
                                             OnPropertyChanged("SelectedPhanBon");
-                                        return;
+                                            return;
 
-                                    }
+                                        }
 
 
                                     }

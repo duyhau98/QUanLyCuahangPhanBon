@@ -16,8 +16,9 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             try
             {
                 FillDataKH();
-                //getDataPhanBon();
                 GiamSLMua = new DelegateCommand(DecreaseSL);
+                //getDataPhanBon();
+
             }
             catch(Exception ex)
             {
@@ -37,7 +38,8 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                  _SelectedKhachHang = value;
                 OnPropertyChanged("SelectedKhachHang");
                 getDataPhanBon();
-          
+                MessageBox.Show("OK");
+
             }
         }
         private ObservableCollection<KhachHang> _ListKH;
@@ -60,8 +62,8 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                 OnPropertyChanged("ListPhanBon");
             }
         }
-        private KhachHang _SelectedPhanBon;
-        public KhachHang SelectedPhanBon
+        private PhanBon _SelectedPhanBon;
+        public PhanBon SelectedPhanBon
         {
             get
             {
@@ -71,7 +73,14 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             {
                 _SelectedPhanBon = value;
                 OnPropertyChanged("SelectedPhanBon");
-
+                if(_SelectedPhanBon!=null)
+                {
+                    
+                    return;
+                }
+                  
+                
+               
 
             }
         }
@@ -82,7 +91,10 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
         }
         private void DecreaseSL(object parameter)
         {
-            MessageBox.Show("Huhu");
+            if(_SelectedPhanBon!=null)
+                MessageBox.Show(_SelectedPhanBon.TenPhanBon);
+            _SelectedPhanBon = null;
+            OnPropertyChanged("SelectedPhanBon");
         }
         private void getDataPhanBon()
         {
