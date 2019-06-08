@@ -21,8 +21,8 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
         {
            
             SaveImage = new DelegateCommand(SaveImageClick);
-            EditPhanBon = new DelegateCommand(Edit);
-            SavePhanBon = new DelegateCommand(Save);
+           
+            AddPhanBon = new DelegateCommand(Save);
             ExitThisWindow = new DelegateCommand(Exit);
             FillComboBox();
             if (phanBon!=null)
@@ -37,12 +37,16 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
                 _gia = phanBon.Gia.ToString();
                 _soLuong = phanBon.SoLuong.ToString();
                 imagePath = phanBon.HinhAnh;
-                BitmapImage bm = new BitmapImage();
-                bm.BeginInit();
-                bm.UriSource = new Uri(imagePath, UriKind.RelativeOrAbsolute);
+                if(imagePath!=null)
+                {
+                    BitmapImage bm = new BitmapImage();
+                    bm.BeginInit();
+                    bm.UriSource = new Uri(imagePath, UriKind.RelativeOrAbsolute);
 
-                bm.EndInit();
-                _sourceImage = bm;
+                    bm.EndInit();
+                    _sourceImage = bm;
+                }
+                
             }
             
         }
@@ -132,12 +136,8 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             get;
             private set;
         }
-        public ICommand EditPhanBon
-        {
-            get;
-            private set;
-        }
-        public ICommand SavePhanBon
+      
+        public ICommand AddPhanBon
         {
             get;
             private set;
@@ -173,15 +173,10 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
         }
         private void Exit(object parameter)
         {
-            var EditWindow = parameter as Window;
-            EditWindow.Close();
+            var AddWindow = parameter as Window;
+            AddWindow.Close();
         }
-        private void Edit(object parameter)
-        {
-            
-            _isChinhSua = true;
-            OnPropertyChanged("isChinhSua");
-        }
+       
        
         private void SaveImageClick(object parameter)
         {

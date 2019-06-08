@@ -251,7 +251,8 @@
                 <Button
                     Width="35" Height="35"
                     x:Name="btnAddProduct"
-                   
+                   Command="{Binding AddPhanBon}"
+                     CommandParameter="{Binding ElementName=NhapUserControl}"
                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                     ToolTip="Thêm">
                     <materialDesign:PackIcon

@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyPhanPhanBon.View.Nhap"
+         xmlns:Them="clr-namespace:QuanLyPhanPhanBon.ViewModel.NhapViewModel"
         mc:Ignorable="d"
+        x:Name="ThemPhanBonWindow"
         Title="Thêm phân bón" Height="500" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
@@ -15,6 +17,9 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.DataContext>
+        <Them:ThemPhanBonViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -46,7 +51,7 @@
             <Grid Height="250">
                 <Grid Width="200" Height="200">
                     <Border CornerRadius="7" BorderThickness="2" BorderBrush="White">
-                        <Image Source="/Image/noimage.png" Name="HinhAnhSP" Width="200" Height="200" ></Image>
+                        <Image Source="{Binding SourceImage}" Name="HinhAnhSP" Width="200" Height="200" ></Image>
                     </Border>
                 </Grid>
             </Grid>
@@ -77,7 +82,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Tên phân bón"></TextBlock>
                 <TextBox
-                    Name="txtMaSP"
+                    Text="{Binding TenPhanBon}"
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="SP098"
                     VerticalAlignment="Center">
@@ -92,6 +97,10 @@
                 <TextBlock Text="Loại phân bón"></TextBlock>
                 <ComboBox
                     Name="txtTenSP"
+                    SelectedValuePath="Key"
+                    DisplayMemberPath="Value"
+                    ItemsSource="{Binding LoaiPhanBon}"
+                    SelectedItem="{Binding SelectedLoaiPhanBon}"
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Loại phân bón"
                     VerticalAlignment="Center">
@@ -105,6 +114,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Số lượng"></TextBlock>
                 <TextBox
+                    Text="{Binding SoLuong}"
                     Name="txtSoLuong"
                     Grid.Column="1"
                     VerticalAlignment="Center">
@@ -118,6 +128,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Đơn Giá"></TextBlock>
                 <TextBox
+                    Text="{Binding Gia}"
                     Name="txtGia"
                     Grid.Column="1"
                     VerticalAlignment="Center">
@@ -133,6 +144,7 @@
             <Button 
                 Name="btnSave"
                 Command="{Binding AddPhanBon}"
+                CommandParameter="{Binding ElementName=ThemPhanBonWindow}"
                 Width="150"
                 Style="{DynamicResource MaterialDesignRaisedButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth4">
@@ -142,6 +154,7 @@
             <Button
                 Name="btnExit"
                 Command="{Binding ExitThisWindow}"
+                CommandParameter="{Binding ElementName=ThemPhanBonWindow}"
                 Width="150"
                 Grid.Column="1"
                 Style="{DynamicResource MaterialDesignRaisedButton}"

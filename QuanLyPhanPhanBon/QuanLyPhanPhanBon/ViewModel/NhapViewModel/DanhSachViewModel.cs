@@ -28,6 +28,7 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             DeletePhanBon = new DelegateCommand(DeletePB);
             ConfirmDelete = new DelegateCommand(ConfirmDeletePhanBon);
             RefreshData = new DelegateCommand(RefreshDataNew);
+            AddPhanBon = new DelegateCommand(addPhanBon);
             //Refesh();
         }
        
@@ -314,6 +315,30 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
                 FillMyDataGrid();
             }
              
+        }
+        public ICommand AddPhanBon
+        {
+            get;
+            private set;
+        }
+        private void addPhanBon(object parameter)
+        {
+            ThemPhanBon themPhanBon = new ThemPhanBon();
+            themPhanBon.ShowDialog();
+            if (_selectedLoaiPhanBon != null)
+            {
+                FillMyDataGrid();
+                PhanBonTheoLoai();
+
+                return;
+            }
+
+            else
+            {
+
+                FillMyDataGrid();
+                return;
+            }
         }
         public ICommand RefreshData
         {
