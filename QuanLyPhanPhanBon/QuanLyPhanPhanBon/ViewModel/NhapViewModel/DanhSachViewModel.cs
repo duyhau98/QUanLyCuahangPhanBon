@@ -314,6 +314,13 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
                 }
                 FillMyDataGrid();
             }
+            else
+            {   
+                checkBox.Visibility = Visibility.Collapsed;
+                AddAdvancedFormat = Visibility.Visible;
+                AdvancedFormat = Visibility.Collapsed;
+                isClickDelete = false;
+            }
              
         }
         public ICommand AddPhanBon
@@ -350,11 +357,11 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             FillMyDataGrid();
         }
         public object InventaireItemGrid { get; private set; }
-
+        DataGridTemplateColumn checkBox = new DataGridTemplateColumn();
         public void DeletePB(object parameter)
         {
             isClickDelete = true;
-            var checkBox = parameter as DataGridTemplateColumn;
+             checkBox = parameter as DataGridTemplateColumn;
             checkBox.Visibility = Visibility.Visible;
             AddAdvancedFormat = Visibility.Collapsed;
             AdvancedFormat = Visibility.Visible;
