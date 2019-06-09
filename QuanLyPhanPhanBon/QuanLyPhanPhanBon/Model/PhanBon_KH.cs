@@ -20,6 +20,7 @@ namespace QuanLyPhanPhanBon.Model
         public int SoLuong { get; set; }
         public System.DateTime NgayBan { get; set; }
         public string KhuyenMai { get; set; }
+        public decimal Gia { get; set; }
     
         public virtual KhachHang KhachHang { get; set; }
         public virtual KhuyenMai KhuyenMai1 { get; set; }

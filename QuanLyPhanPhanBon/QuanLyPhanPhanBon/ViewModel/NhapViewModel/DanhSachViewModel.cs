@@ -134,7 +134,7 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             {
                 _selectedPhanBon = value;
                 OnPropertyChanged("SelectedPhanBon");
-                
+              
                 if (isClickDelete==false)
                 {
                     

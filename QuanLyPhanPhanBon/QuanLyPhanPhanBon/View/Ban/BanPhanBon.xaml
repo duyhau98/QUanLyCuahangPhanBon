@@ -90,9 +90,10 @@
             <DataGrid
                 IsReadOnly="True"
                  ItemsSource="{Binding ListPhanBon}"
-                SelectedItem="{Binding SelectedPhanBon}"
+                SelectedItem="{Binding SelectedPhanBon,Mode=Default}"
                 Grid.RowSpan="2"
                 IsEnabled="{Binding isSelectKH}"
+                 IsHitTestVisible="{Binding IsSelectedRow}"
                 Margin="5"
                 Name="DataGridPhanBon"
                 HorizontalAlignment="Stretch"
@@ -195,11 +196,13 @@
                         <TextBlock FontSize="15" Text="Khách hàng: "></TextBlock>
                         <TextBlock FontSize="15" Name="customername" FontWeight="Bold" Text="{Binding TenKhachHang}"></TextBlock>
                     </StackPanel>
-                    <ListView Grid.Row="1" Name="ListViewSPMua">
+                    <ListView Grid.Row="1" Name="ListViewPBMua"
+                              ItemsSource="{Binding ListPhanBon_KH}"
+                              >
                         <ListView.View>
                             <GridView  >
                                 <GridViewColumn  Header="Tên phân bón" DisplayMemberBinding="{Binding TenPhanBon}"></GridViewColumn>
-                                <GridViewColumn Header="Khuyến mãi (%)" DisplayMemberBinding="{Binding KhuyenMai}"></GridViewColumn>
+                                <GridViewColumn Header="Khuyến mãi" DisplayMemberBinding="{Binding KhuyenMai}"></GridViewColumn>
                                 <GridViewColumn Header="SL" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
                                 <GridViewColumn Header="Giá (VNĐ)" DisplayMemberBinding="{Binding Gia}"></GridViewColumn>
                             </GridView>
@@ -215,13 +218,13 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel HorizontalAlignment="right" >
                             <TextBlock Margin="5" FontSize="13"  Text="Tổng tiền: "></TextBlock>
-                            <TextBlock Margin="5" FontSize="13"  Text="Khuyến mãi: "></TextBlock>
+                            <TextBlock Margin="5" FontSize="13"  Text="Khuyến mãi(%): "></TextBlock>
                             <TextBlock Margin="5" FontSize="13" Text="Thành tiền: "></TextBlock>
                         </StackPanel>
                         <StackPanel Grid.Column="1" HorizontalAlignment="Left">
-                            <TextBlock Margin="5" Name="tongtien"  FontSize="13" Text="{Binding TongTien}">0</TextBlock>
-                            <TextBlock Margin="5" Name="khuyenmai" FontSize="13"  Text="{Binding KhuyenMai}">0%</TextBlock>
-                            <TextBlock Margin="5" Name="thanhtien" FontSize="13"  Text="{Binding ThanhTien}">0</TextBlock>
+                            <TextBlock Margin="5" Name="tongtien"  FontSize="13" Text="{Binding TongTien}"></TextBlock>
+                            <TextBlock Margin="5" Name="khuyenmai" FontSize="13"  Text="{Binding KhuyenMai}"></TextBlock>
+                            <TextBlock Margin="5" Name="thanhtien" FontSize="13"  Text="{Binding ThanhTien}"></TextBlock>
                         </StackPanel>
 
                     </Grid>

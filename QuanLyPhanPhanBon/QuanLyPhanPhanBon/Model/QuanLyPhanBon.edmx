@@ -66,6 +66,17 @@
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="NgayBan" Type="datetime" Nullable="false" />
           <Property Name="KhuyenMai" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Gia" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TaiKhoan">
           <Key>
@@ -111,7 +122,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PhanBon_NguonPhanBon">
+        <Association Name="FK_PhanBon_LoaiPhanBon">
           <End Role="LoaiPhanBon" Type="Self.LoaiPhanBon" Multiplicity="1" />
           <End Role="PhanBon" Type="Self.PhanBon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -142,6 +153,7 @@
           <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhanBon" EntityType="Self.PhanBon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhanBon_KH" EntityType="Self.PhanBon_KH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_PhanBon_KH_KhachHang" Association="Self.FK_PhanBon_KH_KhachHang">
             <End Role="KhachHang" EntitySet="KhachHang" />
@@ -155,7 +167,7 @@
             <End Role="PhanBon" EntitySet="PhanBon" />
             <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />
           </AssociationSet>
-          <AssociationSet Name="FK_PhanBon_NguonPhanBon" Association="Self.FK_PhanBon_NguonPhanBon">
+          <AssociationSet Name="FK_PhanBon_LoaiPhanBon" Association="Self.FK_PhanBon_LoaiPhanBon">
             <End Role="LoaiPhanBon" EntitySet="LoaiPhanBon" />
             <End Role="PhanBon" EntitySet="PhanBon" />
           </AssociationSet>
@@ -197,7 +209,7 @@
           </Key>
           <Property Name="IDLoaiPhanBon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoaiPhanBon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="PhanBons" Relationship="Self.FK_PhanBon_NguonPhanBon" FromRole="LoaiPhanBon" ToRole="PhanBon" />
+          <NavigationProperty Name="PhanBons" Relationship="Self.FK_PhanBon_LoaiPhanBon" FromRole="LoaiPhanBon" ToRole="PhanBon" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -222,7 +234,7 @@
           <Property Name="isDelete" Type="Boolean" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="HinhAnh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="LoaiPhanBon1" Relationship="Self.FK_PhanBon_NguonPhanBon" FromRole="PhanBon" ToRole="LoaiPhanBon" />
+          <NavigationProperty Name="LoaiPhanBon1" Relationship="Self.FK_PhanBon_LoaiPhanBon" FromRole="PhanBon" ToRole="LoaiPhanBon" />
           <NavigationProperty Name="PhanBon_KH" Relationship="Self.FK_PhanBon_KH_PhanBon" FromRole="PhanBon" ToRole="PhanBon_KH" />
         </EntityType>
         <EntityType Name="PhanBon_KH">
@@ -236,9 +248,20 @@
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="NgayBan" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="KhuyenMai" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="KhachHang" Relationship="Self.FK_PhanBon_KH_KhachHang" FromRole="PhanBon_KH" ToRole="KhachHang" />
           <NavigationProperty Name="KhuyenMai1" Relationship="Self.FK_PhanBon_KH_KhuyenMai" FromRole="PhanBon_KH" ToRole="KhuyenMai" />
           <NavigationProperty Name="PhanBon" Relationship="Self.FK_PhanBon_KH_PhanBon" FromRole="PhanBon_KH" ToRole="PhanBon" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TaiKhoan">
           <Key>
@@ -273,7 +296,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PhanBon_NguonPhanBon">
+        <Association Name="FK_PhanBon_LoaiPhanBon">
           <End Role="LoaiPhanBon" Type="Self.LoaiPhanBon" Multiplicity="1" />
           <End Role="PhanBon" Type="Self.PhanBon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,6 +339,7 @@
           <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
           <EntitySet Name="PhanBons" EntityType="Self.PhanBon" />
           <EntitySet Name="PhanBon_KH" EntityType="Self.PhanBon_KH" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
           <AssociationSet Name="FK_PhanBon_KH_KhachHang" Association="Self.FK_PhanBon_KH_KhachHang">
             <End Role="KhachHang" EntitySet="KhachHangs" />
@@ -325,7 +349,7 @@
             <End Role="KhuyenMai" EntitySet="KhuyenMais" />
             <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />
           </AssociationSet>
-          <AssociationSet Name="FK_PhanBon_NguonPhanBon" Association="Self.FK_PhanBon_NguonPhanBon">
+          <AssociationSet Name="FK_PhanBon_LoaiPhanBon" Association="Self.FK_PhanBon_LoaiPhanBon">
             <End Role="LoaiPhanBon" EntitySet="LoaiPhanBons" />
             <End Role="PhanBon" EntitySet="PhanBons" />
           </AssociationSet>
@@ -408,6 +432,18 @@
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="NgayBan" ColumnName="NgayBan" />
                 <ScalarProperty Name="KhuyenMai" ColumnName="KhuyenMai" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QuanLyPhanBonModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
