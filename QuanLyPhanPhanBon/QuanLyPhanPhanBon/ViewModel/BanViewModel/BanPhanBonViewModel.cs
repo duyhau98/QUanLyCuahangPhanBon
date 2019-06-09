@@ -15,9 +15,14 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
         static double PhanTramKM { get; set; }
         public BanPhanBonViewModel()
         {
-           
+            _TongTien = "0";
+            OnPropertyChanged("TongTien");
+            _ThanhTien = "0";
+            OnPropertyChanged("ThanhTien");
+            _KhuyenMai = "0%";
+            OnPropertyChanged("KhuyenMai");
             FillDataKH();
-                GiamSLMua = new DelegateCommand(DecreaseSL);
+            GiamSLMua = new DelegateCommand(DecreaseSL);
             //getDataPhanBon();
             
 
@@ -43,6 +48,13 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                     {
                         _ListPhanBon_KH.Clear();
                         OnPropertyChanged("ListPhanBon_KH");
+                        _TongTien = "0";
+                        OnPropertyChanged("TongTien");
+                        _ThanhTien = "0";
+                        OnPropertyChanged("ThanhTien");
+                        _KhuyenMai = "0%";
+                        OnPropertyChanged("KhuyenMai");
+
                     }
                   
                     
@@ -120,6 +132,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
         int count = 0;
         bool isContain = false;
         private int IDPreKhachHang ;
+        private int IDPrSelectedPB;
         public PhanBon SelectedPhanBon
         {
             get
@@ -131,26 +144,26 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                 _SelectedPhanBon = value;
                 OnPropertyChanged("SelectedPhanBon");
 
-               
-                if (_SelectedPhanBon!=null)
+
+                if (_SelectedPhanBon != null)
                 {
 
-                   
+                    IDPrSelectedPB = _SelectedPhanBon.IDPhanBon;
                     isContain = false;
-                    
-                    for (int i = 0; i < _ListPhanBon_KH.Count; i++)
-                        {
-                            if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KH[i].IDPhanBon)
-                            {                               
-                                isContain = true;
-                                break;
-                            }
 
+                    for (int i = 0; i < _ListPhanBon_KH.Count; i++)
+                    {
+                        if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KH[i].IDPhanBon)
+                        {
+                            isContain = true;
+                            break;
                         }
+
+                    }
                     if (isContain == true)
                     {
-               
-                       
+
+
                         if (_ListPhanBon_KH.Count > 0 && _SelectedPhanBon != null)
                         {
 
@@ -161,22 +174,22 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                             }
                             for (int i = 0; i < _ListPhanBon_KHTemp.Count; i++)
                             {
-                                
+
                                 if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KHTemp[i].IDPhanBon)
                                 {
-                                    
+
                                     _ListPhanBon_KHTemp[i].SoLuong = _ListPhanBon_KHTemp[i].SoLuong + 1;
 
-                                    _ListPhanBon_KHTemp[i].Gia = _ListPhanBon_KHTemp[i].Gia + _ListPhanBon_KHTemp[i].Gia /( _ListPhanBon_KHTemp[i].SoLuong-1);
-                                    total += _ListPhanBon_KHTemp[i].Gia/_ListPhanBon_KHTemp[i].SoLuong;
+                                    _ListPhanBon_KHTemp[i].Gia = _ListPhanBon_KHTemp[i].Gia + _ListPhanBon_KHTemp[i].Gia / (_ListPhanBon_KHTemp[i].SoLuong - 1);
+                                    total += _ListPhanBon_KHTemp[i].Gia / _ListPhanBon_KHTemp[i].SoLuong;
                                     _TongTien = total + "";
                                     OnPropertyChanged("TongTien");
                                     _ThanhTien = _TongTien;
                                     OnPropertyChanged("ThanhTien");
-                                   
+
 
                                     RefreshBill(_ListPhanBon_KHTemp);
-                                    if(_SelectedPhanBon.SoLuong>0)
+                                    if (_SelectedPhanBon.SoLuong > 0)
                                     {
                                         ChangeCount(_ListPhanBon_KHTemp[i].IDPhanBon, _SelectedPhanBon.SoLuong);
                                     }
@@ -184,14 +197,14 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                                     {
                                         MessageBox.Show("Sản phẩm hết hàng, xin vui lòng chọn sản phẩm khác");
                                     }
-                                   
+
                                     _SelectedPhanBon = null;
                                     OnPropertyChanged("SelectedPhanBon");
                                     return;
 
                                 }
                             }
-                            
+
 
                         }
 
@@ -200,9 +213,9 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                     }
                     if (isContain == false)
                     {
-                       
+
                         AddListPhanBon_KH();
-                        if(_SelectedPhanBon.SoLuong>0)
+                        if (_SelectedPhanBon.SoLuong > 0)
                         {
                             ChangeCount(_SelectedPhanBon.IDPhanBon, _SelectedPhanBon.SoLuong);
                         }
@@ -211,7 +224,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                             MessageBox.Show("Sản phẩm hết hàng, xin vui lòng chọn sản phẩm khác");
                         }
 
-                        
+
                         _SelectedPhanBon = null;
                         OnPropertyChanged("SelectedPhanBon");
                         return;
@@ -222,9 +235,9 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
 
                     IDPreKhachHang = _SelectedKhachHang.IDKhachHang;
                 }
-                  
-                
-               
+
+
+
 
             }
         }
@@ -314,8 +327,10 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
         private void DecreaseSL(object parameter)
         {
            
-            if(_SelectedPhanBon!=null)
-                MessageBox.Show(_SelectedPhanBon.TenPhanBon);
+            
+
+                MessageBox.Show(IDPrSelectedPB.ToString());
+            
           
         }
         private void getDataPhanBon()
