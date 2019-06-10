@@ -109,6 +109,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuanLyPhanBon.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>QuanLyPhanBon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TaiKhoan.cs">
       <DependentUpon>QuanLyPhanBon.tt</DependentUpon>
     </Compile>
@@ -290,7 +293,6 @@
   <ItemGroup>
     <Resource Include="Image\noimage.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\QuanLyPhanBon.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -25,8 +25,8 @@ namespace QuanLyPhanPhanBon.Model
         public string GioiTinh { get; set; }
         public string SDT { get; set; }
         public string DiaChi { get; set; }
-        public bool IsThieuTien { get; set; }
-        public decimal TienNo { get; set; }
+        public Nullable<bool> IsThieuTien { get; set; }
+        public Nullable<decimal> TienNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhanBon_KH> PhanBon_KH { get; set; }

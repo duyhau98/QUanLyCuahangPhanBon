@@ -9,6 +9,8 @@
     <Property Name="GioiTinh" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="SDT" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsThieuTien" Type="bit" />
+    <Property Name="TienNo" Type="money" />
   </EntityType>
   <EntityType Name="KhuyenMai">
     <Key>
@@ -43,7 +45,7 @@
       <PropertyRef Name="IDPhanBon" />
     </Key>
     <Property Name="IDPhanBon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenPhanBon" Type="nvarchar" MaxLength="100" />
+    <Property Name="TenPhanBon" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="LoaiPhanBon" Type="int" Nullable="false" />
     <Property Name="Gia" Type="int" Nullable="false" />
     <Property Name="isDelete" Type="bit" Nullable="false" />
@@ -60,8 +62,9 @@
     <Property Name="STT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SoLuong" Type="int" Nullable="false" />
     <Property Name="NgayBan" Type="datetime" Nullable="false" />
-    <Property Name="KhuyenMai" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="KhuyenMai" Type="nchar" MaxLength="10" />
     <Property Name="Gia" Type="money" Nullable="false" />
+    <Property Name="TenPhanBon" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -94,7 +97,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PhanBon_KH_KhuyenMai">
-    <End Role="KhuyenMai" Type="Self.KhuyenMai" Multiplicity="1" />
+    <End Role="KhuyenMai" Type="Self.KhuyenMai" Multiplicity="0..1" />
     <End Role="PhanBon_KH" Type="Self.PhanBon_KH" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="KhuyenMai">
@@ -105,7 +108,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PhanBon_KH_PhanBon">
+  <Association Name="FK_PhanBon_KH_PhanBon1">
     <End Role="PhanBon" Type="Self.PhanBon" Multiplicity="1" />
     <End Role="PhanBon_KH" Type="Self.PhanBon_KH" Multiplicity="*" />
     <ReferentialConstraint>
@@ -158,7 +161,7 @@
       <End Role="KhuyenMai" EntitySet="KhuyenMai" />
       <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />
     </AssociationSet>
-    <AssociationSet Name="FK_PhanBon_KH_PhanBon" Association="Self.FK_PhanBon_KH_PhanBon">
+    <AssociationSet Name="FK_PhanBon_KH_PhanBon1" Association="Self.FK_PhanBon_KH_PhanBon1">
       <End Role="PhanBon" EntitySet="PhanBon" />
       <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />
     </AssociationSet>

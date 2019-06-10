@@ -9,6 +9,8 @@
     <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsThieuTien" Type="Boolean" />
+    <Property Name="TienNo" Type="Decimal" Precision="19" Scale="4" />
     <NavigationProperty Name="PhanBon_KH" Relationship="Self.FK_PhanBon_KH_KhachHang" FromRole="KhachHang" ToRole="PhanBon_KH" />
   </EntityType>
   <EntityType Name="KhuyenMai">
@@ -47,14 +49,14 @@
       <PropertyRef Name="IDPhanBon" />
     </Key>
     <Property Name="IDPhanBon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenPhanBon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenPhanBon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="LoaiPhanBon" Type="Int32" Nullable="false" />
     <Property Name="Gia" Type="Int32" Nullable="false" />
     <Property Name="isDelete" Type="Boolean" Nullable="false" />
     <Property Name="SoLuong" Type="Int32" />
     <Property Name="HinhAnh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="LoaiPhanBon1" Relationship="Self.FK_PhanBon_LoaiPhanBon" FromRole="PhanBon" ToRole="LoaiPhanBon" />
-    <NavigationProperty Name="PhanBon_KH" Relationship="Self.FK_PhanBon_KH_PhanBon" FromRole="PhanBon" ToRole="PhanBon_KH" />
+    <NavigationProperty Name="PhanBon_KH" Relationship="Self.FK_PhanBon_KH_PhanBon1" FromRole="PhanBon" ToRole="PhanBon_KH" />
   </EntityType>
   <EntityType Name="PhanBon_KH">
     <Key>
@@ -66,11 +68,12 @@
     <Property Name="STT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SoLuong" Type="Int32" Nullable="false" />
     <Property Name="NgayBan" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="KhuyenMai" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="KhuyenMai" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TenPhanBon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="KhachHang" Relationship="Self.FK_PhanBon_KH_KhachHang" FromRole="PhanBon_KH" ToRole="KhachHang" />
     <NavigationProperty Name="KhuyenMai1" Relationship="Self.FK_PhanBon_KH_KhuyenMai" FromRole="PhanBon_KH" ToRole="KhuyenMai" />
-    <NavigationProperty Name="PhanBon" Relationship="Self.FK_PhanBon_KH_PhanBon" FromRole="PhanBon_KH" ToRole="PhanBon" />
+    <NavigationProperty Name="PhanBon" Relationship="Self.FK_PhanBon_KH_PhanBon1" FromRole="PhanBon_KH" ToRole="PhanBon" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -104,7 +107,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PhanBon_KH_KhuyenMai">
-    <End Role="KhuyenMai" Type="Self.KhuyenMai" Multiplicity="1" />
+    <End Role="KhuyenMai" Type="Self.KhuyenMai" Multiplicity="0..1" />
     <End Role="PhanBon_KH" Type="Self.PhanBon_KH" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="KhuyenMai">
@@ -139,7 +142,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PhanBon_KH_PhanBon">
+  <Association Name="FK_PhanBon_KH_PhanBon1">
     <End Role="PhanBon" Type="Self.PhanBon" Multiplicity="1" />
     <End Role="PhanBon_KH" Type="Self.PhanBon_KH" Multiplicity="*" />
     <ReferentialConstraint>
@@ -176,7 +179,7 @@
       <End Role="NhanVien" EntitySet="NhanViens" />
       <End Role="TaiKhoan" EntitySet="TaiKhoans" />
     </AssociationSet>
-    <AssociationSet Name="FK_PhanBon_KH_PhanBon" Association="Self.FK_PhanBon_KH_PhanBon">
+    <AssociationSet Name="FK_PhanBon_KH_PhanBon1" Association="Self.FK_PhanBon_KH_PhanBon1">
       <End Role="PhanBon" EntitySet="PhanBons" />
       <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />
     </AssociationSet>
