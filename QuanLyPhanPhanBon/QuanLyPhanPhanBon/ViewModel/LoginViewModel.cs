@@ -22,7 +22,8 @@ namespace QuanLyPhanPhanBon.ViewModel
         {
             _isQuanLy = true;
             LoginCommand = new DelegateCommand(LoginClick);
-
+            _txtUser = "duyhau";
+             
 
         }
         private string _txtUser;

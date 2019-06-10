@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using QuanLyPhanPhanBon.Model;
+using QuanLyPhanPhanBon.View.Ban;
 namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
 {
     
     public class BanPhanBonViewModel :BaseViewModel
     {
-        static double PhanTramKM { get; set; }
+        public static double PhanTramKM { get; set; }
         public BanPhanBonViewModel()
         {
             _TongTien = "0";
@@ -24,7 +25,8 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             FillDataKH();
             GiamSLMua = new DelegateCommand(DecreaseSL);
             //getDataPhanBon();
-            
+            TangSLMua = new DelegateCommand(IncreaseSL);
+            NhapKM = new DelegateCommand(KM);
 
 
         }
@@ -108,7 +110,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             }
         }
         private string _KhuyenMai;
-        public string KhuyenMai
+        public string PTKhuyenMai
         {
             get { return _KhuyenMai; }
             set
@@ -142,97 +144,21 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             set
             {
                 _SelectedPhanBon = value;
-                OnPropertyChanged("SelectedPhanBon");
-
-                if(decrease==true)
-                {
-
-                }
-                else
-                {
+                OnPropertyChanged("SelectedPhanBon");             
                     if (_SelectedPhanBon != null)
                     {
 
                         IDPrSelectedPB = _SelectedPhanBon.IDPhanBon;
-                        isContain = false;
-
-                        for (int i = 0; i < _ListPhanBon_KH.Count; i++)
-                        {
-                            if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KH[i].IDPhanBon)
-                            {
-                                isContain = true;
-                                break;
-                            }
-
-                        }
-                        if (isContain == true)
-                        {
-
-
-                            if (_ListPhanBon_KH.Count > 0 && _SelectedPhanBon != null)
-                            {
-
-                                _ListPhanBon_KHTemp.Clear();
-                                for (int i = 0; i < _ListPhanBon_KH.Count; i++)
-                                {
-                                    _ListPhanBon_KHTemp.Add(_ListPhanBon_KH[i]);
-                                }
-                                for (int i = 0; i < _ListPhanBon_KHTemp.Count; i++)
-                                {
-
-                                    if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KHTemp[i].IDPhanBon)
-                                    {
-                                        _ListPhanBon_KHTemp[i].SoLuong = _ListPhanBon_KHTemp[i].SoLuong + 1;
-
-                                        _ListPhanBon_KHTemp[i].Gia = _ListPhanBon_KHTemp[i].Gia + _ListPhanBon_KHTemp[i].Gia / (_ListPhanBon_KHTemp[i].SoLuong - 1);
-                                        total += _ListPhanBon_KHTemp[i].Gia / _ListPhanBon_KHTemp[i].SoLuong;
-                                        _TongTien = total + "";
-                                        OnPropertyChanged("TongTien");
-                                        _ThanhTien = _TongTien;
-                                        OnPropertyChanged("ThanhTien");
-                                        RefreshBill(_ListPhanBon_KHTemp);
-
-                                        if (_SelectedPhanBon.SoLuong > 0)
-                                        {
-                                            ChangeCount(_ListPhanBon_KHTemp[i].IDPhanBon, _SelectedPhanBon.SoLuong);
-                                        }
-                                        else
-                                        {
-                                            MessageBox.Show("Sản phẩm hết hàng, xin vui lòng chọn sản phẩm khác");
-                                        }
-                                        _SelectedPhanBon = null;
-                                        OnPropertyChanged("SelectedPhanBon");
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                        if (isContain == false)
-                        {
-
-                            AddListPhanBon_KH();
-                            if (_SelectedPhanBon.SoLuong > 0)
-                            {
-                                ChangeCount(_SelectedPhanBon.IDPhanBon, _SelectedPhanBon.SoLuong);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Sản phẩm hết hàng, xin vui lòng chọn sản phẩm khác");
-                            }
-                            _SelectedPhanBon = null;
-                            OnPropertyChanged("SelectedPhanBon");
-                            IDPreKhachHang = _SelectedKhachHang.IDKhachHang;
-                            return;
-                        }
+                       
                     }
-                }
+                
                 
                 
             }
         }
         ObservableCollection<PhanBon> ListPhanBonTemp = new ObservableCollection<PhanBon>();
         ObservableCollection<PhanBon> _ListPhanBonTemp = new ObservableCollection<PhanBon>();
-        private void ChangeCount(int id,int? SL)
+        private void ChangeCount(int id,int? SL,bool isIncrease)
         {
             
             if(ListPhanBonTemp.Count>0)
@@ -247,7 +173,14 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             {
                 if (id == ListPhanBonTemp[i].IDPhanBon)
                 {
-                    ListPhanBonTemp[i].SoLuong = SL-1;
+                    if(isIncrease)
+                    {
+                        ListPhanBonTemp[i].SoLuong = SL - 1;
+                    }
+                    else
+                    {
+                        ListPhanBonTemp[i].SoLuong = SL + 1;
+                    }
                     break;
                 }
             }
@@ -295,7 +228,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                 phanBon_KH.Gia = _SelectedPhanBon.Gia;
                 phanBon_KH.SoLuong = 1;
                 total += phanBon_KH.Gia/phanBon_KH.SoLuong;
-             
+                PreTotal = total;
                 _ListPhanBon_KH.Add(phanBon_KH);
                 OnPropertyChanged("ListPhanBon_KH");
                 _TongTien = total + "";
@@ -307,6 +240,36 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
            
             
         }
+        public ICommand NhapKM
+        {
+            get;
+            set;
+        }
+        decimal PreTotal = 0;
+        public void KM(object parameter )
+        {
+            try
+            {
+                
+                
+                View.Ban.KhuyenMai khuyenMai = new View.Ban.KhuyenMai();
+                khuyenMai.ShowDialog();
+                 
+              
+                OnPropertyChanged("ThanhTien");
+                _KhuyenMai = PhanTramKM + "%";
+                OnPropertyChanged("PTKhuyenMai");
+                decimal Sum = PreTotal - PreTotal * decimal.Parse((PhanTramKM / 100).ToString());
+                _ThanhTien = Sum + "";
+                OnPropertyChanged("ThanhTien");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+         
         public ICommand GiamSLMua
         {
             get;
@@ -318,7 +281,165 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
         private bool decrease = false;
         private void DecreaseSL(object parameter)
         {
-         
+            isContain = false;
+
+            for (int i = 0; i < _ListPhanBon_KH.Count; i++)
+            {
+                if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KH[i].IDPhanBon)
+                {
+                    isContain = true;
+                    break;
+                }
+
+            }
+            if (isContain == true)
+            {
+
+
+                if (_ListPhanBon_KH.Count > 0 && _SelectedPhanBon != null)
+                {
+
+                    _ListPhanBon_KHTemp.Clear();
+                    for (int i = 0; i < _ListPhanBon_KH.Count; i++)
+                    {
+                        _ListPhanBon_KHTemp.Add(_ListPhanBon_KH[i]);
+                    }
+                    for (int i = 0; i < _ListPhanBon_KHTemp.Count; i++)
+                    {
+
+                        if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KHTemp[i].IDPhanBon)
+                        {
+                            _ListPhanBon_KHTemp[i].SoLuong = _ListPhanBon_KHTemp[i].SoLuong - 1;
+                            if(_ListPhanBon_KHTemp[i].SoLuong==0 )
+                            {
+                                total -= _ListPhanBon_KHTemp[i].Gia / (_ListPhanBon_KHTemp[i].SoLuong+1);
+                                PreTotal = total;
+                                _TongTien = total + "";
+                                OnPropertyChanged("TongTien");
+                                _ThanhTien = _TongTien;
+                                OnPropertyChanged("ThanhTien");
+                                ChangeCount(_ListPhanBon_KHTemp[i].IDPhanBon, _SelectedPhanBon.SoLuong,false);
+                                _ListPhanBon_KHTemp.RemoveAt(i);
+                                RefreshBill(_ListPhanBon_KHTemp);
+                                
+
+
+
+                            }
+                            else
+                            {
+                                _ListPhanBon_KHTemp[i].Gia = _ListPhanBon_KHTemp[i].Gia - _ListPhanBon_KHTemp[i].Gia / (_ListPhanBon_KHTemp[i].SoLuong + 1);
+                                total -= _ListPhanBon_KHTemp[i].Gia / _ListPhanBon_KHTemp[i].SoLuong;
+                                PreTotal = total;
+                                _TongTien = total + "";
+                                OnPropertyChanged("TongTien");
+                                _ThanhTien = _TongTien;
+                                OnPropertyChanged("ThanhTien");
+                                RefreshBill(_ListPhanBon_KHTemp);
+                                ChangeCount(_ListPhanBon_KHTemp[i].IDPhanBon, _SelectedPhanBon.SoLuong, false);
+                                //if (_SelectedPhanBon.SoLuong > 0)
+                                //{
+                                //    ChangeCount(_ListPhanBon_KHTemp[i].IDPhanBon, _SelectedPhanBon.SoLuong,false);
+                                //}
+                                //else
+                                //{
+                                //    MessageBox.Show("Sản phẩm hết hàng, xin vui lòng chọn sản phẩm khác");
+                                //}
+                                _SelectedPhanBon = null;
+                                OnPropertyChanged("SelectedPhanBon");
+                            }
+                           
+                            return;
+                        }
+                    }
+                }
+            }
+            if (isContain == false)
+            {
+
+                MessageBox.Show("Chưa thêm phân bón vào hóa đơn, vui lòng kiểm tra lại!!!");
+                return;
+            }
+        }
+        public ICommand TangSLMua
+        {
+            get;
+            private set;
+        }
+        private void IncreaseSL(object parameter)
+        {
+            isContain = false;
+
+            for (int i = 0; i < _ListPhanBon_KH.Count; i++)
+            {
+                if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KH[i].IDPhanBon)
+                {
+                    isContain = true;
+                    break;
+                }
+
+            }
+            if (isContain == true)
+            {
+
+
+                if (_ListPhanBon_KH.Count > 0 && _SelectedPhanBon != null)
+                {
+
+                    _ListPhanBon_KHTemp.Clear();
+                    for (int i = 0; i < _ListPhanBon_KH.Count; i++)
+                    {
+                        _ListPhanBon_KHTemp.Add(_ListPhanBon_KH[i]);
+                    }
+                    for (int i = 0; i < _ListPhanBon_KHTemp.Count; i++)
+                    {
+
+                        if (_SelectedPhanBon.IDPhanBon == _ListPhanBon_KHTemp[i].IDPhanBon)
+                        {
+                            if (_SelectedPhanBon.SoLuong == 0)
+                            {
+                                MessageBox.Show("Sản phẩm hết hàng, xin vui lòng chọn sản phẩm khác");
+                            }
+                            else
+                            {
+                                _ListPhanBon_KHTemp[i].SoLuong = _ListPhanBon_KHTemp[i].SoLuong + 1;
+
+                                _ListPhanBon_KHTemp[i].Gia = _ListPhanBon_KHTemp[i].Gia + _ListPhanBon_KHTemp[i].Gia / (_ListPhanBon_KHTemp[i].SoLuong - 1);
+                                total += _ListPhanBon_KHTemp[i].Gia / _ListPhanBon_KHTemp[i].SoLuong;
+                                PreTotal = total;
+                                _TongTien = total + "";
+                                OnPropertyChanged("TongTien");
+                                _ThanhTien = _TongTien;
+                                OnPropertyChanged("ThanhTien");
+                                RefreshBill(_ListPhanBon_KHTemp);
+                                ChangeCount(_ListPhanBon_KHTemp[i].IDPhanBon, _SelectedPhanBon.SoLuong, true);
+
+                                _SelectedPhanBon = null;
+                                OnPropertyChanged("SelectedPhanBon");
+                                return;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            if (isContain == false)
+            {
+
+                AddListPhanBon_KH();
+                if (_SelectedPhanBon.SoLuong > 0)
+                {
+                    ChangeCount(_SelectedPhanBon.IDPhanBon, _SelectedPhanBon.SoLuong,true);
+                }
+                else
+                {
+                    MessageBox.Show("Sản phẩm hết hàng, xin vui lòng chọn sản phẩm khác");
+                }
+                _SelectedPhanBon = null;
+                OnPropertyChanged("SelectedPhanBon");
+                IDPreKhachHang = _SelectedKhachHang.IDKhachHang;
+                return;
+            }
         }
         private void getDataPhanBon()
         {
