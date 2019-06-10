@@ -27,11 +27,22 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             //getDataPhanBon();
             TangSLMua = new DelegateCommand(IncreaseSL);
             NhapKM = new DelegateCommand(KM);
-
+            ThanhToan = new DelegateCommand(_ThanhToan);
 
         }
         private PhanBon_KH phanBonDaBan;
         private decimal total = 0;
+        public string _TenKhachHang;
+        public string TenKhachHang
+        {
+            get { return _TenKhachHang; }
+            set
+            {
+                _TenKhachHang = value;
+                OnPropertyChanged("TenKhachHang");
+            }
+            
+        }
         private KhachHang _SelectedKhachHang;
         public KhachHang SelectedKhachHang
         {
@@ -43,6 +54,8 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             {
                  _SelectedKhachHang = value;
                 OnPropertyChanged("SelectedKhachHang");
+                _TenKhachHang = _SelectedKhachHang.TenKhachHang;
+                OnPropertyChanged("TenKhachHang");
                 getDataPhanBon();
                 if(IDPreKhachHang!=_SelectedKhachHang.IDKhachHang)
                 {
@@ -224,6 +237,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                 PhanBon_KH phanBon_KH = new PhanBon_KH();
                 phanBon_KH.IDKhachHang = _SelectedKhachHang.IDKhachHang;
                 phanBon_KH.IDPhanBon = _SelectedPhanBon.IDPhanBon;
+                phanBon_KH.TenPhanBon = _SelectedPhanBon.TenPhanBon;
                 phanBon_KH.NgayBan = DateTime.Now;
                 phanBon_KH.Gia = _SelectedPhanBon.Gia;
                 phanBon_KH.SoLuong = 1;
