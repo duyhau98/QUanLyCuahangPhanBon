@@ -250,6 +250,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
         {
             try
             {
+             
                 
                 
                 View.Ban.KhuyenMai khuyenMai = new View.Ban.KhuyenMai();
@@ -269,7 +270,35 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             }
             
         }
-         
+         public ICommand ThanhToan
+        {
+            get;
+            private set;
+        }
+        public void _ThanhToan(object parameter)
+        {
+            try
+            {
+                ThanhToanViewModel.IDKhachHang = _SelectedKhachHang.IDKhachHang;
+                ThanhToanViewModel.ToTal = decimal.Parse(_ThanhTien);
+                View.Ban.ThanhToan thanhToan = new ThanhToan();
+                thanhToan.ShowDialog();
+               
+                for(int i=0;i<_ListPhanBon_KH.Count;i++)
+                {
+                    QuanLyPhanBonEntities quanLyPhanBonEntities = new QuanLyPhanBonEntities();
+                    quanLyPhanBonEntities.PhanBon_KH.Add(_ListPhanBon_KH[i]);
+                    quanLyPhanBonEntities.SaveChanges();
+                    //Chỗ này
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
+        }
         public ICommand GiamSLMua
         {
             get;

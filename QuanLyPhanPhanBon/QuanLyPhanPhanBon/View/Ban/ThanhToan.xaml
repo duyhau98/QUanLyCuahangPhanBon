@@ -4,17 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyPhanPhanBon.View.Ban"
+         xmlns:BanPhanBonViewModel="clr-namespace:QuanLyPhanPhanBon.ViewModel.BanViewModel"
         mc:Ignorable="d"
-        Title="Thanh toán" Height="300" Width="350"   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Thanh toán" Height="300" Width="450"   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="15"
         TextOptions.TextFormattingMode="Ideal"
+        Name="ThanToan"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-
+    <Window.DataContext>
+        <BanPhanBonViewModel:ThanhToanViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,12 +38,13 @@
             <TextBlock FontSize="30" Margin="0,0,0,20" FontWeight="Bold">Số tiền khách đưa:</TextBlock>
             <StackPanel 
             Orientation="Horizontal">
-                <TextBox Name="txtbox" FontSize="30" Width="250" ></TextBox>
+                <TextBox Name="txtbox" FontSize="30" Width="250" Text="{Binding TienKhach}" ></TextBox>
                 <TextBlock FontSize="30">VNĐ</TextBlock>
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="10" Width="130" >Thanh toán</Button>
-                <Button Margin="10" Width="130" >Thoát</Button>
+                <Button Margin="10" Width="130" Command="{Binding No}" >Nợ</Button>
+                <Button Margin="10" Width="130" Command="{Binding ThanhToan}" CommandParameter="{Binding ElementName=ThanToan}" >Thanh toán</Button>
+                <Button Margin="10" Width="130" Command="{Binding Exit}" CommandParameter="{Binding ElementName=ThanToan}">Thoát</Button>
             </StackPanel>
 
         </StackPanel>

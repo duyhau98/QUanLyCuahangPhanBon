@@ -31,7 +31,6 @@ namespace QuanLyPhanPhanBon.Model
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<PhanBon> PhanBons { get; set; }
         public virtual DbSet<PhanBon_KH> PhanBon_KH { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
     }
 }
