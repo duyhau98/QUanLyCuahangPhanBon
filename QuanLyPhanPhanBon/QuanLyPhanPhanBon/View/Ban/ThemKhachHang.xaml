@@ -10,12 +10,16 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
+        Name="ThemKH"
+           xmlns:KMViewModel="clr-namespace:QuanLyPhanPhanBon.ViewModel.BanViewModel"
         TextElement.FontSize="15"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-
+    <Window.DataContext>
+        <KMViewModel:ThemKhachHangViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -63,11 +67,10 @@
                     <ColumnDefinition ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Giới tính"></TextBlock>
-                <ComboBox Name="cbboxGioiTinh" Grid.Column="1">
-                    <ComboBox.Items>
-                        <ComboBoxItem>Nam</ComboBoxItem>
-                        <ComboBoxItem>Nữ</ComboBoxItem>
-                    </ComboBox.Items>
+                <ComboBox   SelectedValuePath="Key" ItemsSource="{Binding GioiTinh}"
+                          DisplayMemberPath="Key"  materialDesign:HintAssist.Hint="Chọn giới tính"
+                    Name="cbboxGioiTinh" SelectedItem="{Binding SelectedGioiTinh}" Grid.Column="1">
+                    
                 </ComboBox>
             </Grid>
 
@@ -80,20 +83,9 @@
                 <TextBox
                     Name="txtSDT"
                     Grid.Column="1"
-                    VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-
-            <Grid Height="50">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition ></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Email"></TextBlock>
-                <TextBox
-                    Name="txtEmail"
-                    Grid.Column="1"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Text="{Binding SDT}">
+                    
                 </TextBox>
             </Grid>
 
@@ -106,7 +98,8 @@
                 <TextBox
                     Name="txtDiaChi"
                     Grid.Column="1"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Text="{Binding DiaChi}">
                 </TextBox>
             </Grid>
 
@@ -120,6 +113,7 @@
             <Button 
                 Name="btnSave"
                Command="{Binding SaveKH}"
+                CommandParameter="{Binding ElementName=ThemKH}"
                 Width="150"
                 Style="{DynamicResource MaterialDesignRaisedButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth4">

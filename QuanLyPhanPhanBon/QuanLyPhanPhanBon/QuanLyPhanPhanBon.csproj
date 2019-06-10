@@ -118,6 +118,7 @@
     <Compile Include="ViewModel\BanViewModel\BanPhanBonViewModel.cs" />
     <Compile Include="ViewModel\BanViewModel\KhuyenMaiViewModel.cs" />
     <Compile Include="ViewModel\BanViewModel\ThanhToanViewModel.cs" />
+    <Compile Include="ViewModel\BanViewModel\ThemKhachHangViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NhapViewModel\ChinhSuaPhanBonViewModel.cs" />

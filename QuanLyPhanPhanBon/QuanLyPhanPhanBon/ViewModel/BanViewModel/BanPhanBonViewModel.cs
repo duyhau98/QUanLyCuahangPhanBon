@@ -28,7 +28,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             TangSLMua = new DelegateCommand(IncreaseSL);
             NhapKM = new DelegateCommand(KM);
             ThanhToan = new DelegateCommand(_ThanhToan);
-
+            ThemKH = new DelegateCommand(_ThemKH);
         }
         private PhanBon_KH phanBonDaBan;
         private decimal total = 0;
@@ -42,6 +42,24 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                 OnPropertyChanged("TenKhachHang");
             }
             
+        }
+        public ICommand ThemKH
+        {
+            get;
+            private set;
+        }
+        public void _ThemKH(object parameter)
+        {
+            ThemKhachHang themKhachHang = new ThemKhachHang();
+            themKhachHang.ShowDialog();
+            RefreshKH();
+        }
+        public void RefreshKH()
+        {
+            QuanLyPhanBonEntities quanLyPhanBonEntities = new QuanLyPhanBonEntities();
+            _ListKH = new ObservableCollection<KhachHang>(quanLyPhanBonEntities.KhachHangs.ToList());
+            OnPropertyChanged("ListKH");
+            quanLyPhanBonEntities.SaveChanges();
         }
         private KhachHang _SelectedKhachHang;
         public KhachHang SelectedKhachHang
