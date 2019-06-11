@@ -108,7 +108,13 @@
                     Header="Số lượng"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
                 </materialDesign:MaterialDataGridTextColumn>
-
+                <!--NGÀY BÁN-->
+                <materialDesign:MaterialDataGridTextColumn
+                    Binding="{Binding NgayBan}"
+                    Width="150"
+                    Header="Số lượng"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+                </materialDesign:MaterialDataGridTextColumn>
 
                 <!--THÀNH TIỀN-->
                 <materialDesign:MaterialDataGridTextColumn
@@ -139,14 +145,17 @@
             </materialDesign:Snackbar>
         </Grid>
 
-        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,10,0,0" >
+        <Button Command="{Binding Refesh}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" >
             <materialDesign:PackIcon Kind="Loop">
             </materialDesign:PackIcon>
-        </Label>
+        </Button>
         <StackPanel Width="150">
             <DatePicker
+                Text="{Binding RecentDate}"
+                
                 Name="dpick"
                 HorizontalAlignment="Left"
+                SelectedDate="{Binding SelectedDate}"
                 Width="120"
                 materialDesign:HintAssist.Hint="Locale Date" 
                 FontSize="14" 
