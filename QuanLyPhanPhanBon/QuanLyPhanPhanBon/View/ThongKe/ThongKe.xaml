@@ -35,7 +35,7 @@
 
         </ScrollViewer>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" FontSize="20" Foreground="Red" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Tổng doanh thu:" Margin="360,0,0,30"/>
-        <TextBlock x:Name="txtTongDoanhThu" HorizontalAlignment="Center" FontSize="20" Foreground="Red" VerticalAlignment="Bottom" TextWrapping="Wrap"  Margin="520,0,480,30" Width="6"/>
+        <TextBlock x:Name="txtTongDoanhThu" HorizontalAlignment="Center" FontSize="20" Foreground="Red" VerticalAlignment="Bottom"  Text="{Binding TongDoanhThu}"  Margin="200,0,0,30" Width="Auto"/>
 
 
 

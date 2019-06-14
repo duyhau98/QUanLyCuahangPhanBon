@@ -17,7 +17,7 @@ namespace QuanLyPhanPhanBon.ViewModel.ThongKeViewModel
                 ObservableCollection<PhanBon_KH> phanBon_KHs = new ObservableCollection<PhanBon_KH>(quanLyPhanBonEntities.PhanBon_KH.ToList());
                 ObservableCollection<PhanBon_KH> TempPB_KH = new ObservableCollection<PhanBon_KH>();
 
-
+                decimal TongTien = 0;
                 for (int i=0;i<phanBon_KHs.Count;i++)
                 {
                     
@@ -26,8 +26,10 @@ namespace QuanLyPhanPhanBon.ViewModel.ThongKeViewModel
                             TempPB_KH.Add(phanBon_KHs[i]);
                             
                         }
+                    TongTien += phanBon_KHs[i].Gia;
                 }
-                
+                _TongDoanhThu = TongTien+"";
+                OnPropertyChanged("TongDoanhThu");
                 for(int i=0;i<(TempPB_KH.Count-1);i++)
                 {
                     for(int j=i+1;j<TempPB_KH.Count;j++)
@@ -65,6 +67,19 @@ namespace QuanLyPhanPhanBon.ViewModel.ThongKeViewModel
             {
                 _TopBanChay = value;
                 OnPropertyChanged("TopBanChay");
+            }
+        }
+        private string _TongDoanhThu;
+        public string TongDoanhThu
+        {
+            get
+            {
+                return _TongDoanhThu;
+            }
+            set
+            {
+                _TongDoanhThu = value;
+                OnPropertyChanged("TongDoanhThu");
             }
         }
     }
