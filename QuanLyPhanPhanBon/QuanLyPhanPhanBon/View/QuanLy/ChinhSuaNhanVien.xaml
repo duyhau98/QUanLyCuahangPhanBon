@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyPhanPhanBon.View.QuanLy"
         mc:Ignorable="d"
+        Name="ThemNhanVienWD"
+        xmlns:ChinhSua="clr-namespace:QuanLyPhanPhanBon.ViewModel.QuanLyViewModel"
         Title="Sửa thông tin" Height="600" Width="900"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
@@ -15,6 +17,9 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.DataContext>
+        <ChinhSua:ChinhSuaViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,114 +31,159 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
 
+        </Grid>
         <TextBlock Text="Tài khoản" TextAlignment="Center" Margin="645,26,135,516"/>
-        <Grid Height="50" Margin="10,68,390,451">
+        <Grid Height="50" Margin="10,68,0,450">
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Tên nhân viên" Margin="10,16,35,-16"/>
             <TextBox
+                IsEnabled="{Binding isEdit}"
                 x:Name="txtTenNV"
+                Text="{Binding TenNhanVien}"
                 Grid.Column="1"
                 materialDesign:HintAssist.Hint="Duy Hậu"
                 VerticalAlignment="Center" Margin="0,10,21,10"/>
         </Grid>
-        <Grid Height="50" Margin="12,171,388,348">
+        <Grid Height="50" Margin="10,124,0,395">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Giới tính" Margin="10,16,45,0"/>
+            <ComboBox
+                 IsEnabled="{Binding isEdit}"
+                SelectedValuePath="Key" ItemsSource="{Binding GioiTinh}"
+                          DisplayMemberPath="Key"  materialDesign:HintAssist.Hint="Chọn giới tính"
+                    Name="cbboxGioiTinh" SelectedItem="{Binding SelectedGioiTinh}" Grid.Column="1" Margin="0,10,21,10">
+
+            </ComboBox>
+        </Grid>
+        <Grid Height="50" Margin="12,171,0,348">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Địa chỉ" Margin="10,16,47,-16"/>
             <TextBox
+                 IsEnabled="{Binding isEdit}"
                 x:Name="txtDiaChi"
                 Grid.Column="1"
+                Text="{Binding DiaChi}"
                 materialDesign:HintAssist.Hint="Quận 8"
                 VerticalAlignment="Center" Height="30" Margin="0,10,21,10"/>
         </Grid>
-        <Grid Height="50" Margin="12,221,388,298">
+        <Grid Height="50" Margin="12,221,0,298">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Số điện thoại" Margin="10,16,47,-16"/>
             <TextBox
+                 IsEnabled="{Binding isEdit}"
+                Text="{Binding SDT}"
                 x:Name="txtSDT"
                 Grid.Column="1"
                 materialDesign:HintAssist.Hint="09888888"
                 VerticalAlignment="Center" Height="30" Margin="0,10,22,10"/>
         </Grid>
-        <Grid Height="50" Margin="12,276,388,243">
+        <Grid Height="50" Margin="12,276,0,243">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Lương" Margin="10,16,45,-16"/>
             <TextBox
+                 IsEnabled="{Binding isEdit}"
+                Text="{Binding Luong}"
                 x:Name="txtLuong"
                 Grid.Column="1"
                 materialDesign:HintAssist.Hint="1000000"
                 VerticalAlignment="Center" Height="30" Margin="0,10,19,10"/>
         </Grid>
+        <Grid  Height="50" Margin="30,50,0,466" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Tên tài khoản" Margin="10,10,0,0"/>
+            <TextBox
+                 IsEnabled="False"
+                Text="{Binding TenTaiKhoan}"
+                x:Name="txtTenTaiKhoan"
+                Grid.Column="1"
+                materialDesign:HintAssist.Hint="User name"
+                VerticalAlignment="Center" Height="30" Margin="0,10,19,10"/>
+        </Grid>
+        <Grid Height="50"  Margin="30,100,0,405" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Mật khẩu" Margin="10,10,0,0"/>
+            <TextBox
+                 IsEnabled="{Binding isEdit}"
+                Text="{Binding PassWord}"
+                x:Name="passWord"
+                materialDesign:HintAssist.Hint=""
+                VerticalAlignment="Center" Height="30" Margin="0,10,10,10" Grid.Column="1"/>
+        </Grid>
         <Button 
+            Command="{Binding RemoveNhanVien}"
+            CommandParameter="{Binding ElementName=ThemNhanVienWD}"
+                Name="btnRemove"
+               Height="40"
+                Width="180"
+            HorizontalAlignment="Right"
+                Style="{DynamicResource MaterialDesignRaisedButton}"
+                materialDesign:ShadowAssist.ShadowDepth="Depth4" Grid.Column="0" Margin="0,300,250,0" RenderTransformOrigin="0.5,-0.46" >
+            Xóa nhân viên
+        </Button>
+        <Button 
+            
+            Command="{Binding EditNhanVien}"
+            CommandParameter="{Binding ElementName=ThemNhanVienWD}"
+                Name="btnEdit"
+               Height="40"
+                Width="180"
+            HorizontalAlignment="Right"
+                Style="{DynamicResource MaterialDesignRaisedButton}"
+                materialDesign:ShadowAssist.ShadowDepth="Depth4" Grid.Column="0" Margin="0,300,10,0" RenderTransformOrigin="0.5,-0.46" >
+            Chỉnh sửa nhân viên
+        </Button>
+        <Button 
+            
+            Command="{Binding SaveNhanVien}"
+            CommandParameter="{Binding ElementName=ThemNhanVienWD}"
                 Name="btnSave"
                Height="40"
                 Width="150"
                 Style="{DynamicResource MaterialDesignRaisedButton}"
-                materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="527,415,215,114" >
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"   Grid.Column="1" Margin="10,300,200,0" >
             Lưu nhân viên
         </Button>
         <Button 
+             CommandParameter="{Binding ElementName=ThemNhanVienWD}"
                 Name="btnExit"
                Height="40"
-                Width="150"
+            Width="150"
+            HorizontalAlignment="Right"
                 Style="{DynamicResource MaterialDesignRaisedButton}"
-                materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="720,415,22,114"  >
+                materialDesign:ShadowAssist.ShadowDepth="Depth4"  Grid.Column="1" Margin="0,300,20,0"  >
             Thoát
         </Button>
-        <Grid Height="50" Margin="565,64,20,456">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Tên tài khoản" Margin="10,16,45,-16"/>
-            <TextBox
-                x:Name="txtTenTaiKhoan"
-                Grid.Column="1"
-                materialDesign:HintAssist.Hint="duyhaudeptrai"
-                VerticalAlignment="Center" Height="30" Margin="0,10,19,10"/>
-        </Grid>
-        <Grid Height="50" Margin="565,114,20,406">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Mật khẩu" Margin="10,16,45,-16"/>
-            <PasswordBox
-                x:Name="passWord"
-                Grid.Column="1"
-                materialDesign:HintAssist.Hint=""
-                VerticalAlignment="Center" Height="30" Margin="0,10,19,10"/>
-        </Grid>
-        <Grid Height="50" Margin="10,124,390,395">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Giới tính" Margin="10,16,45,-16"/>
-            <TextBox
-                x:Name="txtGioiTinh"
-                Grid.Column="1"
-                materialDesign:HintAssist.Hint="Nam/Nữ"
-                VerticalAlignment="Center" Height="30" Margin="0,10,19,10"/>
-        </Grid>
-        <Button 
-            x:Name="btnSave_Copy"
-            Height="40"
-            Width="150"
-            Style="{DynamicResource MaterialDesignRaisedButton}"
-            materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="333,415,409,114" Content="Chỉnh sửa" />
+
+
     </Grid>
+
 </Window>

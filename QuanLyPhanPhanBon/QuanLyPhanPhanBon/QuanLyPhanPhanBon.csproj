@@ -124,8 +124,11 @@
     <Compile Include="ViewModel\NhapViewModel\ChinhSuaPhanBonViewModel.cs" />
     <Compile Include="ViewModel\NhapViewModel\DanhSachViewModel.cs" />
     <Compile Include="ViewModel\NhapViewModel\ThemPhanBonViewModel.cs" />
+    <Compile Include="ViewModel\QuanLyViewModel\ChinhSuaViewModel.cs" />
+    <Compile Include="ViewModel\QuanLyViewModel\QuanLyLuongViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\QuanLyNhanVienViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\ThemNhanVienViewModel.cs" />
+    <Compile Include="ViewModel\ThongKeViewModel\ThongKeViewModel.cs" />
     <Compile Include="ViewModel\ThuViewModel\ThuViewModel.cs" />
     <Compile Include="View\Ban\BanPhanBon.xaml.cs">
       <DependentUpon>BanPhanBon.xaml</DependentUpon>

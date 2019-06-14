@@ -23,5 +23,7 @@ namespace QuanLyPhanPhanBon.View.QuanLy
         {
             InitializeComponent();
         }
+
+     
     }
 }

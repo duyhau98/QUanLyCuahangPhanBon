@@ -4,14 +4,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
+using System.Windows.Input;
+using QuanLyPhanPhanBon.Model;
 namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
 {
     public class ThemNhanVienViewModel :BaseViewModel
     {
         public ThemNhanVienViewModel()
         {
-
+            _GioiTinh.Add(new KeyValuePair<string, int>("Nam", 1));
+            _GioiTinh.Add(new KeyValuePair<string, int>("Nữ", 2));
+            SaveNhanVien = new DelegateCommand(_SaveNhanVien);
         }
         private string _TenNhanVien;
         public string TenNhanVien
@@ -34,6 +38,17 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
             {
                 _GioiTinh = value;
                 OnPropertyChanged("GioiTinh");
+            }
+        }
+        private KeyValuePair<string, int> _SelectedGioiTinh = new KeyValuePair<string, int>();
+        public KeyValuePair<string, int> SelectedGioiTinh
+        {
+            get { return _SelectedGioiTinh; }
+            set
+            {
+                _SelectedGioiTinh = value;
+                OnPropertyChanged("SelectedGioiTinh");
+
             }
         }
         private string _DiaChi;
@@ -101,7 +116,33 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
                 OnPropertyChanged("PassWord");
             }
         }
-
+        public ICommand SaveNhanVien
+        {
+            get;
+            private set;
+        } 
+        public void _SaveNhanVien(object parameter)
+        {
+            var ThemNhanVienWD = parameter as Window;
+            try
+            {
+                NhanVien nhanVien = new NhanVien();
+                QuanLyPhanBonEntities quanLyPhanBonEntities = new QuanLyPhanBonEntities();
+                nhanVien.TenNhanVien = _TenNhanVien;
+                nhanVien.GioiTinh = _SelectedGioiTinh.Key;
+                nhanVien.SDT = _SDT;
+                nhanVien.DiaChi = _DiaChi;
+                nhanVien.Luong = Int32.Parse(_Luong);
+                quanLyPhanBonEntities.NhanViens.Add(nhanVien);
+                quanLyPhanBonEntities.SaveChanges();
+                ThemNhanVienWD.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
+        }
     }
     
 }

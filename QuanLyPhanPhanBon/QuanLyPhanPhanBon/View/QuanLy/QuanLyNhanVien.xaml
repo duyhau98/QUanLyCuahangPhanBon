@@ -26,7 +26,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#FF303030">
+    <Grid Background="#FF303030" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
@@ -47,7 +47,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <Grid Height="400" >
+            <Grid Height="400">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="135*"/>
                     <ColumnDefinition Width="32*"/>
@@ -55,6 +55,9 @@
 
 
                 <DataGrid
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ListNhanVien}"
+                    SelectedItem="{Binding SelectedNhanVien}"
                  Name="DataGridListEmployee"                  
              HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
@@ -82,7 +85,7 @@
                         <materialDesign:MaterialDataGridTextColumn
                     Width="150"
                       FontSize="14"
-                    Binding="{Binding TenNV}"
+                    Binding="{Binding TenNhanVien}"
                     Header="Nhân viên"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
                         </materialDesign:MaterialDataGridTextColumn>
@@ -105,6 +108,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Button 
+                 
                 x:Name="btnDiemDanh"   
                 Margin="0,0,0,30"
                 VerticalAlignment="Bottom"
@@ -115,6 +119,8 @@
             </Button>
 
             <Button 
+                Command="{Binding QLLuong}"
+                
                 x:Name="btnQuanLyLuong" 
                 Margin="0,0,0,30"
                 VerticalAlignment="Bottom"

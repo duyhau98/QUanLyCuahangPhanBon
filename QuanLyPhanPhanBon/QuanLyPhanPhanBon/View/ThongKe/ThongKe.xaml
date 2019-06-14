@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyPhanPhanBon.View.ThongKe"
+              xmlns:ThongKe="clr-namespace:QuanLyPhanPhanBon.ViewModel.ThongKeViewModel"
              mc:Ignorable="d" 
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
               xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
  Height="450" Width="1000"
               >
+    <UserControl.DataContext>
+        <ThongKe:ThongKeViewModel/>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,75 +28,18 @@
     <Grid Background="Azure">
 
         <ScrollViewer  HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Height="327" Width="746"  HorizontalAlignment="Left" Margin="79,53,0,0">
-            <chartingToolkit:Chart   Margin="0"  Name="columnChart" Title="Những sản phẩm bán chạy nhất" Width="658" Height="356">
-                <chartingToolkit:ColumnSeries Name="column" DependentValuePath="Value" Title="Số lượng" IndependentValuePath="Key"  ItemsSource="{Binding}" Margin="0,0,4,15" />
+            <chartingToolkit:Chart   Margin="0"  Name="columnChart" Title="Top những phân bón bán chạy nhất trong tháng"  Height="317" DataContext="{Binding TopBanChay}">
+                <chartingToolkit:ColumnSeries Name="column"  DependentValuePath="Value" Title="Số lượng" IndependentValuePath="Key"   ItemsSource="{Binding }" Margin="10,0,-6,0" Height="250" VerticalAlignment="Top" />
             </chartingToolkit:Chart>
 
 
         </ScrollViewer>
-        <ComboBox x:Name="comboBox"  materialDesign:HintAssist.Hint="Chọn phương thức thống kê sản phẩm bán chạy" Foreground="Black"  HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Width="280">
-
-        </ComboBox>
-        <DatePicker
-            Visibility="Hidden"
-            
-  Name="datePickerTheoNgay"
-  materialDesign:HintAssist.Hint="Chọn ngày"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,40" Width="120" />
-        <ComboBox   materialDesign:HintAssist.Hint="Chọn tháng"  x:Name="comboThang" Visibility="Hidden"  HorizontalAlignment="Left" Height="30" Margin="280,40,0,0" VerticalAlignment="Top" Width="120">
-
-        </ComboBox>
-        <TextBox    materialDesign:HintAssist.Hint="Nhập năm" x:Name="txtNam" Visibility="Hidden" HorizontalAlignment="Left" Height="30" Margin="420,40,0,0" VerticalAlignment="Top" Width="120">
-
-        </TextBox>
-        <TextBox    materialDesign:HintAssist.Hint="Nhập năm"  x:Name="txtTKTheoNam" Visibility="Hidden" HorizontalAlignment="Left" Height="30" Margin="280,40,0,0" VerticalAlignment="Top" Width="120">
-
-        </TextBox>
-        <DatePicker
-            Visibility="Hidden"
-           
-  Name="datePickerNgayBatDau"
-  materialDesign:HintAssist.Hint="Chọn ngày bắt đầu"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,40" Width="120" />
-
-        <DatePicker
-            Visibility="Hidden"
-           
-  Name="datePickerNgayKetThuc"
-  materialDesign:HintAssist.Hint="Chọn ngày kết thúc"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="430,40" Width="120" />
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" FontSize="20" Foreground="Red" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Tổng doanh thu:" Margin="360,0,0,30"/>
-        <TextBlock x:Name="txtTongDoanhThu" HorizontalAlignment="Center" FontSize="20" Foreground="Red" VerticalAlignment="Bottom" TextWrapping="Wrap"  Margin="30"/>
-        <DatePicker
-           
-            
-  Name="datePickerDoanhThuTheoNgay"
-            Visibility="Hidden"
-  materialDesign:HintAssist.Hint="Chọn ngày"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="50,50" Width="120" />
-        <TextBlock x:Name="txtDoanhThu" HorizontalAlignment="Right" Margin="0,0,70,70" FontSize="22" TextWrapping="Wrap" Text="0 VNĐ" VerticalAlignment="Bottom"/>
-        <ComboBox   materialDesign:HintAssist.Hint="Chọn tháng"  x:Name="comboThangDoanhThu"  Visibility="Hidden"   HorizontalAlignment="Right" Height="30" Margin="0,50,200,0" VerticalAlignment="Top" Width="120">
+        <TextBlock x:Name="txtTongDoanhThu" HorizontalAlignment="Center" FontSize="20" Foreground="Red" VerticalAlignment="Bottom" TextWrapping="Wrap"  Margin="520,0,480,30" Width="6"/>
 
-        </ComboBox>
-        <TextBox    materialDesign:HintAssist.Hint="Nhập năm"  x:Name="txtNamDoanhThu"  HorizontalAlignment="Right"  Visibility="Hidden" Height="30" Margin="0,50,50,0" VerticalAlignment="Top" Width="120">
 
-        </TextBox>
-        <TextBox    materialDesign:HintAssist.Hint="Nhập năm"  x:Name="txtNamDoanhThuThongKe"  HorizontalAlignment="Right"  Visibility="Hidden" Height="30" Margin="0,50,50,0" VerticalAlignment="Top" Width="120">
 
-        </TextBox>
-        <DatePicker
-            Visibility="Hidden"
-            
-  Name="datePickerNgayBatDauDoanhThu"
-  materialDesign:HintAssist.Hint="Chọn ngày bắt đầu"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="200,50" Width="120" />
 
-        <DatePicker
-            Visibility="Hidden"
-           
-  Name="datePickerNgayKetThucDoanhThu"
-  materialDesign:HintAssist.Hint="Chọn ngày kết thúc"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="50,50" Width="120" />
     </Grid>
 
 

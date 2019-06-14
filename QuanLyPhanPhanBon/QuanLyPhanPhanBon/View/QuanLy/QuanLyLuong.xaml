@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyPhanPhanBon.View.QuanLy"
+         xmlns:QLyLuong="clr-namespace:QuanLyPhanPhanBon.ViewModel.QuanLyViewModel"
         mc:Ignorable="d"
+        Name="QLyLuongWD"
         Title="Quản lý lương" Height="450" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz">
-
+    <Window.DataContext>
+        <QLyLuong:QuanLyLuongViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,7 +27,7 @@
     </Window.Resources>
     <Grid  Background="#FF303030">
         <DataGrid
-            
+            ItemsSource="{Binding ListNhanVien}"
             Name="DataGridLuong"
             Grid.ColumnSpan="3" Grid.Row="1"
             HorizontalAlignment="Stretch"
@@ -59,7 +63,7 @@
 
                 <!--Lương-->
                 <materialDesign:MaterialDataGridTextColumn
-                    Width="100"
+                    Width="300"
                     Binding="{Binding Luong}"
                     Header="Lương/h"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
@@ -69,5 +73,6 @@
 
 
         </DataGrid>
+        <Button CommandParameter="{Binding ElementName=QLyLuongWD}" VerticalAlignment="Bottom" Width="120" Height="40" Command="{Binding OK}"> OK</Button>
     </Grid>
 </Window>
