@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="QuanLyPhanBonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DiemDanh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayLam" Type="date" Nullable="false" />
+          <Property Name="isCoMat" Type="bit" />
+          <Property Name="isVang" Type="bit" />
+          <Property Name="NhanVien" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="KhachHang">
           <Key>
             <PropertyRef Name="IDKhachHang" />
@@ -89,6 +99,18 @@
           <Property Name="TenTaiKhoan" Type="nchar" MaxLength="15" Nullable="false" />
           <Property Name="MatKhau" Type="nchar" MaxLength="15" Nullable="false" />
         </EntityType>
+        <Association Name="FK_DiemDanh_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="DiemDanh">
+              <PropertyRef Name="NhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PhanBon_KH_KhachHang">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
           <End Role="PhanBon_KH" Type="Self.PhanBon_KH" Multiplicity="*" />
@@ -150,6 +172,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="QuanLyPhanBonModelStoreContainer">
+          <EntitySet Name="DiemDanh" EntityType="Self.DiemDanh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhuyenMai" EntityType="Self.KhuyenMai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoaiPhanBon" EntityType="Self.LoaiPhanBon" Schema="dbo" store:Type="Tables" />
@@ -158,6 +181,10 @@
           <EntitySet Name="PhanBon_KH" EntityType="Self.PhanBon_KH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DiemDanh_NhanVien" Association="Self.FK_DiemDanh_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="DiemDanh" EntitySet="DiemDanh" />
+          </AssociationSet>
           <AssociationSet Name="FK_PhanBon_KH_KhachHang" Association="Self.FK_PhanBon_KH_KhachHang">
             <End Role="KhachHang" EntitySet="KhachHang" />
             <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />
@@ -184,6 +211,17 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QuanLyPhanBonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DiemDanh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayLam" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="isCoMat" Type="Boolean" />
+          <Property Name="isVang" Type="Boolean" />
+          <Property Name="NhanVien" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NhanVien1" Relationship="Self.FK_DiemDanh_NhanVien" FromRole="DiemDanh" ToRole="NhanVien" />
+        </EntityType>
         <EntityType Name="KhachHang">
           <Key>
             <PropertyRef Name="IDKhachHang" />
@@ -226,6 +264,7 @@
           <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Luong" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DiemDanhs" Relationship="Self.FK_DiemDanh_NhanVien" FromRole="NhanVien" ToRole="DiemDanh" />
           <NavigationProperty Name="TaiKhoans" Relationship="Self.FK_TaiKhoan_NhanVien" FromRole="NhanVien" ToRole="TaiKhoan" />
         </EntityType>
         <EntityType Name="PhanBon">
@@ -278,6 +317,18 @@
           <Property Name="MatKhau" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_TaiKhoan_NhanVien" FromRole="TaiKhoan" ToRole="NhanVien" />
         </EntityType>
+        <Association Name="FK_DiemDanh_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="DiemDanh">
+              <PropertyRef Name="NhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PhanBon_KH_KhachHang">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
           <End Role="PhanBon_KH" Type="Self.PhanBon_KH" Multiplicity="*" />
@@ -339,6 +390,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="QuanLyPhanBonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DiemDanhs" EntityType="Self.DiemDanh" />
           <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
           <EntitySet Name="KhuyenMais" EntityType="Self.KhuyenMai" />
           <EntitySet Name="LoaiPhanBons" EntityType="Self.LoaiPhanBon" />
@@ -347,6 +399,10 @@
           <EntitySet Name="PhanBon_KH" EntityType="Self.PhanBon_KH" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <AssociationSet Name="FK_DiemDanh_NhanVien" Association="Self.FK_DiemDanh_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="DiemDanh" EntitySet="DiemDanhs" />
+          </AssociationSet>
           <AssociationSet Name="FK_PhanBon_KH_KhachHang" Association="Self.FK_PhanBon_KH_KhachHang">
             <End Role="KhachHang" EntitySet="KhachHangs" />
             <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />
@@ -374,6 +430,17 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="QuanLyPhanBonModelStoreContainer" CdmEntityContainer="QuanLyPhanBonEntities">
+          <EntitySetMapping Name="DiemDanhs">
+            <EntityTypeMapping TypeName="QuanLyPhanBonModel.DiemDanh">
+              <MappingFragment StoreEntitySet="DiemDanh">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="NgayLam" ColumnName="NgayLam" />
+                <ScalarProperty Name="isCoMat" ColumnName="isCoMat" />
+                <ScalarProperty Name="isVang" ColumnName="isVang" />
+                <ScalarProperty Name="NhanVien" ColumnName="NhanVien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="KhachHangs">
             <EntityTypeMapping TypeName="QuanLyPhanBonModel.KhachHang">
               <MappingFragment StoreEntitySet="KhachHang">

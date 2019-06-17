@@ -17,6 +17,7 @@ namespace QuanLyPhanPhanBon.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhanVien()
         {
+            this.DiemDanhs = new HashSet<DiemDanh>();
             this.TaiKhoans = new HashSet<TaiKhoan>();
         }
     
@@ -27,6 +28,8 @@ namespace QuanLyPhanPhanBon.Model
         public string DiaChi { get; set; }
         public int Luong { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DiemDanh> DiemDanhs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
     }

@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QuanLyPhanBonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DiemDanh">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayLam" Type="date" Nullable="false" />
+    <Property Name="isCoMat" Type="bit" />
+    <Property Name="isVang" Type="bit" />
+    <Property Name="NhanVien" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="KhachHang">
     <Key>
       <PropertyRef Name="IDKhachHang" />
@@ -84,6 +94,18 @@
     <Property Name="TenTaiKhoan" Type="nchar" MaxLength="15" Nullable="false" />
     <Property Name="MatKhau" Type="nchar" MaxLength="15" Nullable="false" />
   </EntityType>
+  <Association Name="FK_DiemDanh_NhanVien">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+    <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="IDNhanVien" />
+      </Principal>
+      <Dependent Role="DiemDanh">
+        <PropertyRef Name="NhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PhanBon_KH_KhachHang">
     <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
     <End Role="PhanBon_KH" Type="Self.PhanBon_KH" Multiplicity="*" />
@@ -145,6 +167,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="QuanLyPhanBonModelStoreContainer">
+    <EntitySet Name="DiemDanh" EntityType="Self.DiemDanh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KhuyenMai" EntityType="Self.KhuyenMai" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LoaiPhanBon" EntityType="Self.LoaiPhanBon" Schema="dbo" store:Type="Tables" />
@@ -153,6 +176,10 @@
     <EntitySet Name="PhanBon_KH" EntityType="Self.PhanBon_KH" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DiemDanh_NhanVien" Association="Self.FK_DiemDanh_NhanVien">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DiemDanh" EntitySet="DiemDanh" />
+    </AssociationSet>
     <AssociationSet Name="FK_PhanBon_KH_KhachHang" Association="Self.FK_PhanBon_KH_KhachHang">
       <End Role="KhachHang" EntitySet="KhachHang" />
       <End Role="PhanBon_KH" EntitySet="PhanBon_KH" />

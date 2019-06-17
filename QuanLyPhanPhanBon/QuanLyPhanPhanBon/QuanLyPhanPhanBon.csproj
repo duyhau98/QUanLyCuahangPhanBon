@@ -76,6 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DiemDanh.cs">
+      <DependentUpon>QuanLyPhanBon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\KhachHang.cs">
       <DependentUpon>QuanLyPhanBon.tt</DependentUpon>
     </Compile>
@@ -125,6 +128,7 @@
     <Compile Include="ViewModel\NhapViewModel\DanhSachViewModel.cs" />
     <Compile Include="ViewModel\NhapViewModel\ThemPhanBonViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\ChinhSuaViewModel.cs" />
+    <Compile Include="ViewModel\QuanLyViewModel\DiemDanhViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\QuanLyLuongViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\QuanLyNhanVienViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\ThemNhanVienViewModel.cs" />

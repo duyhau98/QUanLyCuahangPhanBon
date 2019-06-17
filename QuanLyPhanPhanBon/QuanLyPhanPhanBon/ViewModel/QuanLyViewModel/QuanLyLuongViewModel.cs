@@ -19,6 +19,7 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
                 OnPropertyChanged("ListNhanVien");
                 quanLyPhanBonEntities.SaveChanges();
             }
+            OK = new DelegateCommand(_OK);
         }
         private ObservableCollection<NhanVien> _ListNhanVien = new ObservableCollection<NhanVien>();
         public ObservableCollection<NhanVien> ListNhanVien

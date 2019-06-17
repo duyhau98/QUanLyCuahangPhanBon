@@ -15,6 +15,7 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
         {
             AddNhanVien = new DelegateCommand(_AddNhanVien);
             QLLuong = new DelegateCommand(_QLLuong);
+            DiemDanh = new DelegateCommand(_DiemDanh);
             Refresh();
         }
         public ICommand QLLuong
@@ -26,6 +27,16 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
         {
             QuanLyLuong quanLyLuong = new QuanLyLuong();
             quanLyLuong.ShowDialog();
+        }
+        public ICommand DiemDanh
+        {
+            get;
+            private set;
+        }
+        public void _DiemDanh(object parameter)
+        {
+            View.QuanLy.DiemDanh diemDanh = new View.QuanLy.DiemDanh();
+            diemDanh.ShowDialog();
         }
         public ICommand AddNhanVien
         {

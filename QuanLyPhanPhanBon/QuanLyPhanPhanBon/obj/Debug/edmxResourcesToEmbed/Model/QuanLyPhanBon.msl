@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QuanLyPhanBonModelStoreContainer" CdmEntityContainer="QuanLyPhanBonEntities">
+    <EntitySetMapping Name="DiemDanhs">
+      <EntityTypeMapping TypeName="QuanLyPhanBonModel.DiemDanh">
+        <MappingFragment StoreEntitySet="DiemDanh">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NgayLam" ColumnName="NgayLam" />
+          <ScalarProperty Name="isCoMat" ColumnName="isCoMat" />
+          <ScalarProperty Name="isVang" ColumnName="isVang" />
+          <ScalarProperty Name="NhanVien" ColumnName="NhanVien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="KhachHangs">
       <EntityTypeMapping TypeName="QuanLyPhanBonModel.KhachHang">
         <MappingFragment StoreEntitySet="KhachHang">

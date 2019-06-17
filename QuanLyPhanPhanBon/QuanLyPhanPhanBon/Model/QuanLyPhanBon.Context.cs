@@ -25,6 +25,7 @@ namespace QuanLyPhanPhanBon.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DiemDanh> DiemDanhs { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }
         public virtual DbSet<LoaiPhanBon> LoaiPhanBons { get; set; }
