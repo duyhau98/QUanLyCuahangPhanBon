@@ -102,7 +102,7 @@
                         <TabItem.Header>
                             <materialDesign:PackIcon Kind="GithubCircle" Foreground="{DynamicResource PrimaryHueLightBrush}"/>
                         </TabItem.Header>
-                        <TextBlock Text="github.com/Abel13/TabMenu2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="https://github.com/duyhau98/QUanLyCuahangPhanBon.git" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </TabItem>
                 </dragablz:TabablzControl>
             </Grid>
