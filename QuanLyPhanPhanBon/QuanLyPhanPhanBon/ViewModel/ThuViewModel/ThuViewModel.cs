@@ -23,7 +23,7 @@ namespace QuanLyPhanPhanBon.ViewModel.ThuViewModel
             }
             _TongTien = Total +"";
             OnPropertyChanged("TongTien");
-
+            Refresh = new DelegateCommand(_Refresh);
         }
         private DateTime _RecentDate;
         public DateTime RecentDate
@@ -108,7 +108,17 @@ namespace QuanLyPhanPhanBon.ViewModel.ThuViewModel
         }
         public void _Refresh(object parameter)
         {
+            
+            _ListPhanBon_KH.Clear();
+            OnPropertyChanged("ListPhanBon_KH");
             getData();
+            decimal Total = 0;
+            for (int i = 0; i < _ListPhanBon_KH.Count; i++)
+            {
+                Total += _ListPhanBon_KH[i].Gia;
+            }
+            _TongTien = Total + "";
+            OnPropertyChanged("TongTien");
         }
         private ObservableCollection<PhanBon_KH> _ListTheoNgay = new ObservableCollection<PhanBon_KH>();
         public void getData()

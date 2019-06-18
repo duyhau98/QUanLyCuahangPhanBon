@@ -88,6 +88,7 @@
     <Compile Include="Model\LoaiPhanBon.cs">
       <DependentUpon>QuanLyPhanBon.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\LuongHienTai.cs" />
     <Compile Include="Model\NhanVien.cs">
       <DependentUpon>QuanLyPhanBon.tt</DependentUpon>
     </Compile>
@@ -128,6 +129,7 @@
     <Compile Include="ViewModel\NhapViewModel\DanhSachViewModel.cs" />
     <Compile Include="ViewModel\NhapViewModel\ThemPhanBonViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\ChinhSuaViewModel.cs" />
+    <Compile Include="ViewModel\QuanLyViewModel\DanhSachLuongViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\DiemDanhViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\QuanLyLuongViewModel.cs" />
     <Compile Include="ViewModel\QuanLyViewModel\QuanLyNhanVienViewModel.cs" />
@@ -170,6 +172,9 @@
     </Compile>
     <Compile Include="View\QuanLy\ChinhSuaNhanVien.xaml.cs">
       <DependentUpon>ChinhSuaNhanVien.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLy\DanhSachLuong.xaml.cs">
+      <DependentUpon>DanhSachLuong.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLy\DiemDanh.xaml.cs">
       <DependentUpon>DiemDanh.xaml</DependentUpon>
@@ -230,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuanLy\ChinhSuaNhanVien.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLy\DanhSachLuong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

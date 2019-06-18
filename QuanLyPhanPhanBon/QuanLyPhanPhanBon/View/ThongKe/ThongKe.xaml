@@ -38,7 +38,10 @@
         <TextBlock x:Name="txtTongDoanhThu" HorizontalAlignment="Center" FontSize="20" Foreground="Red" VerticalAlignment="Bottom"  Text="{Binding TongDoanhThu}"  Margin="200,0,0,30" Width="Auto"/>
 
 
-
+        <Button Command="{Binding Refresh}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" >
+            <materialDesign:PackIcon Kind="Loop">
+            </materialDesign:PackIcon>
+        </Button>
 
     </Grid>
 

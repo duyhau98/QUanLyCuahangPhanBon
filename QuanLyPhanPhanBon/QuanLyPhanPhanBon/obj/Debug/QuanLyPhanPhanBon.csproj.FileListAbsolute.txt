@@ -253,3 +253,5 @@ C:\Users\hud\source\repos\QuanLyPhanBon\QUanLyCuahangPhanBon\QuanLyPhanPhanBon\Q
 C:\Users\hud\source\repos\QuanLyPhanBon\QUanLyCuahangPhanBon\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\QuanLyPhanPhanBon.csproj.CopyComplete
 C:\Users\hud\source\repos\QuanLyPhanBon\QUanLyCuahangPhanBon\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\QuanLyPhanPhanBon.exe
 C:\Users\hud\source\repos\QuanLyPhanBon\QUanLyCuahangPhanBon\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\QuanLyPhanPhanBon.pdb
+D:\QUanLyCuahangPhanBon\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\QuanLy\DanhSachLuong.g.cs
+D:\QUanLyCuahangPhanBon\QuanLyPhanPhanBon\QuanLyPhanPhanBon\obj\Debug\View\QuanLy\DanhSachLuong.baml

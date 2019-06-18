@@ -23,6 +23,7 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
                 EditNhanVien = new DelegateCommand(_EditNhanVien);
                 SaveNhanVien = new DelegateCommand(_SaveNhanVien);
             RemoveNhanVien = new DelegateCommand(_RemoveNhanVien);
+            
                 QuanLyPhanBonEntities quanLyPhanBonEntities = new QuanLyPhanBonEntities();
                 NhanVien nhanVien = quanLyPhanBonEntities.NhanViens.Find(IdNhanVien);
                 _TenNhanVien = nhanVien.TenNhanVien;
@@ -48,6 +49,36 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
                 OnPropertyChanged("isEdit");
             }
         }
+        private bool _isChinhSua;
+        public bool IsChinhSua
+        {
+            get { return _isChinhSua; }
+            set
+            {
+                _isChinhSua = value;
+                OnPropertyChanged("IsChinhSua");
+            }
+        }
+        private bool _isXoa;
+        public bool IsXoa
+        {
+            get { return _isXoa; }
+            set
+            {
+                _isXoa = value;
+                OnPropertyChanged("IsXoa");
+            }
+        }
+        private bool _isSave;
+        public bool IsSave
+        {
+            get { return _isSave; }
+            set
+            {
+                _isSave = value;
+                OnPropertyChanged("IsSave");
+            }
+        }
         public ICommand EditNhanVien
         {
             get;
@@ -57,6 +88,10 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
         {
             _isEdit = true;
             OnPropertyChanged("isEdit");
+            _isXoa = false;
+            OnPropertyChanged("IsXoa");
+            _isSave = true;
+            OnPropertyChanged("IsSave");
         }
         private string _TenNhanVien;
         public string TenNhanVien
@@ -164,6 +199,7 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
         }
         public void _RemoveNhanVien(object parameter)
         {
+            
             var ChinhSUaWD = parameter as Window;
             MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên chứ?", "Quản lý phân bón", MessageBoxButton.YesNo, MessageBoxImage.Hand);
             if (result == MessageBoxResult.Yes)

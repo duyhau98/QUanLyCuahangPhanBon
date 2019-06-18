@@ -16,7 +16,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
         {
             ThanhToan = new DelegateCommand(_ThanhToan);
             No = new DelegateCommand(_No);
-
+            Exit = new DelegateCommand(_Exit);
         }
         private string _TienKhach;
         public string TienKhach

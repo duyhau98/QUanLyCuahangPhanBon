@@ -62,13 +62,13 @@
                     Width="350"
                       FontSize="14"
                     Binding="{Binding TenNhanVien}"
-                    Header="Ca 1 (6h -14h)"
+                    Header=""
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
                         </materialDesign:MaterialDataGridTextColumn>
                         <DataGridTemplateColumn  Width="150" Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Command="{Binding CoMat}" Foreground="White">Có mặt</Button>
+                                    <Button Command="{Binding Path=DataContext.CoMat, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Foreground="White">Có mặt</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -76,7 +76,7 @@
                         <DataGridTemplateColumn  Width="150" Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button  Foreground="White" Command="{Binding Vang}">Vắng</Button>
+                                    <Button  Foreground="White" Command="{Binding Path=DataContext.Vang, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">Vắng</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

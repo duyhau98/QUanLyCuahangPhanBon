@@ -284,10 +284,10 @@
             </StatusBarItem>
         </StatusBar>
 
-        <Label Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" >
+        <Button Command="{Binding RefreshAll}" Background="Red" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" >
             <materialDesign:PackIcon Kind="Loop">
             </materialDesign:PackIcon>
-        </Label>
+        </Button>
 
     </Grid>
 

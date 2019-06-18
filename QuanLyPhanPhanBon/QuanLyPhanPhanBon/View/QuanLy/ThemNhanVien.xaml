@@ -106,6 +106,7 @@
         <Button 
              CommandParameter="{Binding ElementName=ThemNhanVienWD}"
                 Name="btnExit"
+            Command="{Binding Thoat}"
                Height="40"
                 Width="150"
                 Style="{DynamicResource MaterialDesignRaisedButton}"

@@ -16,6 +16,7 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
             _GioiTinh.Add(new KeyValuePair<string, int>("Nam", 1));
             _GioiTinh.Add(new KeyValuePair<string, int>("Nữ", 2));
             SaveNhanVien = new DelegateCommand(_SaveNhanVien);
+            Thoat = new DelegateCommand(_Thoat);
         }
         private string _TenNhanVien;
         public string TenNhanVien
@@ -115,6 +116,16 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
                 _PassWord = value;
                 OnPropertyChanged("PassWord");
             }
+        }
+        public ICommand Thoat
+        {
+            get;
+            private set;
+        }
+        public void _Thoat(object parameter)
+        {
+            var wd = parameter as Window;
+            wd.Close();
         }
         public ICommand SaveNhanVien
         {

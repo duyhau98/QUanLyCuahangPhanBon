@@ -24,11 +24,12 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             OnPropertyChanged("KhuyenMai");
             FillDataKH();
             GiamSLMua = new DelegateCommand(DecreaseSL);
-            //getDataPhanBon();
+            
             TangSLMua = new DelegateCommand(IncreaseSL);
             NhapKM = new DelegateCommand(KM);
             ThanhToan = new DelegateCommand(_ThanhToan);
             ThemKH = new DelegateCommand(_ThemKH);
+            RefreshAll = new DelegateCommand(_RefreshAll);
         }
         private PhanBon_KH phanBonDaBan;
         private decimal total = 0;
@@ -54,6 +55,25 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             themKhachHang.ShowDialog();
             RefreshKH();
         }
+        public ICommand RefreshAll
+        {
+            get;
+            private set;
+        }
+        public void _RefreshAll(object parameter)
+        {
+            _TongTien = "0";
+            OnPropertyChanged("TongTien");
+            _ThanhTien = "0";
+            OnPropertyChanged("ThanhTien");
+            _KhuyenMai = "0%";
+            OnPropertyChanged("KhuyenMai");
+            FillDataKH();
+            _ListPhanBon.Clear();
+            OnPropertyChanged("ListPhanBon");
+            _ListPhanBon_KH.Clear();
+            OnPropertyChanged("ListPhanBon_KH");
+        }
         public void RefreshKH()
         {
             QuanLyPhanBonEntities quanLyPhanBonEntities = new QuanLyPhanBonEntities();
@@ -72,28 +92,32 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
             {
                  _SelectedKhachHang = value;
                 OnPropertyChanged("SelectedKhachHang");
-                _TenKhachHang = _SelectedKhachHang.TenKhachHang;
-                OnPropertyChanged("TenKhachHang");
-                getDataPhanBon();
-                if(IDPreKhachHang!=_SelectedKhachHang.IDKhachHang)
+                if(_SelectedKhachHang!=null)
                 {
-                    if (_ListPhanBon_KH.Count > 0)
+                    _TenKhachHang = _SelectedKhachHang.TenKhachHang;
+                    OnPropertyChanged("TenKhachHang");
+                    getDataPhanBon();
+                    if (IDPreKhachHang != _SelectedKhachHang.IDKhachHang)
                     {
-                        _ListPhanBon_KH.Clear();
-                        OnPropertyChanged("ListPhanBon_KH");
-                        _TongTien = "0";
-                        OnPropertyChanged("TongTien");
-                        _ThanhTien = "0";
-                        OnPropertyChanged("ThanhTien");
-                        _KhuyenMai = "0%";
-                        OnPropertyChanged("KhuyenMai");
+                        if (_ListPhanBon_KH.Count > 0)
+                        {
+                            _ListPhanBon_KH.Clear();
+                            OnPropertyChanged("ListPhanBon_KH");
+                            _TongTien = "0";
+                            OnPropertyChanged("TongTien");
+                            _ThanhTien = "0";
+                            OnPropertyChanged("ThanhTien");
+                            _KhuyenMai = "0%";
+                            OnPropertyChanged("KhuyenMai");
+
+                        }
+
 
                     }
-                  
-                    
+
                 }
-             
-             
+
+
 
             }
         }

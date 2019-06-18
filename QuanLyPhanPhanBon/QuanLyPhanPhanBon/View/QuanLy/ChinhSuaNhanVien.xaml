@@ -144,13 +144,14 @@
                 Name="btnRemove"
                Height="40"
                 Width="180"
+            IsEnabled="{Binding IsXoa}"
             HorizontalAlignment="Right"
                 Style="{DynamicResource MaterialDesignRaisedButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth4" Grid.Column="0" Margin="0,300,250,0" RenderTransformOrigin="0.5,-0.46" >
             Xóa nhân viên
         </Button>
         <Button 
-            
+            IsEnabled="{Binding ISChinhSua}"
             Command="{Binding EditNhanVien}"
             CommandParameter="{Binding ElementName=ThemNhanVienWD}"
                 Name="btnEdit"
@@ -162,7 +163,7 @@
             Chỉnh sửa nhân viên
         </Button>
         <Button 
-            
+            IsEnabled="{Binding IsSave}"
             Command="{Binding SaveNhanVien}"
             CommandParameter="{Binding ElementName=ThemNhanVienWD}"
                 Name="btnSave"
@@ -174,6 +175,7 @@
         </Button>
         <Button 
              CommandParameter="{Binding ElementName=ThemNhanVienWD}"
+            Command="{Binding Thoat}"
                 Name="btnExit"
                Height="40"
             Width="150"
