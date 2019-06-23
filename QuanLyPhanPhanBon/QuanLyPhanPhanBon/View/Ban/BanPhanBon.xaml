@@ -39,7 +39,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0">
-            <TextBox Name="txtSearch" FontSize="13" materialDesign:HintAssist.Hint=" Tìm kiếm" Background="White" Width="120" Height="25" BorderBrush="#89000000" Margin="0,1" ></TextBox>
+            <TextBox Name="txtSearch" Text="{Binding txtTimKiemKH,UpdateSourceTrigger=PropertyChanged}" FontSize="13" materialDesign:HintAssist.Hint=" Tìm kiếm" Background="White" Width="120" Height="25" BorderBrush="#89000000" Margin="0,1" ></TextBox>
             <!--TextChanged="{Binding TimKH}"-->
             <Button       
                 Name="resetTxtSearch"

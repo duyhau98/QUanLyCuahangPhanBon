@@ -32,6 +32,7 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             //Refesh();
         }
         public ObservableCollection<PhanBon> listPBTimKiem = new ObservableCollection<PhanBon>();
+        public ObservableCollection<LoaiPhanBon> listPBTimKiemLoai = new ObservableCollection<LoaiPhanBon>();
         private ObservableCollection<LoaiPhanBon> _listLoaiPhanBon;
         private ObservableCollection<PhanBon> phanBonDataTable;
         private ObservableCollection<PhanBon> TemplatePhanBonDataTable;
@@ -80,6 +81,41 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
                         OnPropertyChanged("PhanBonDataTable");
                     }
                   
+                }
+                else
+                {
+                    FillMyDataGrid();
+                }
+
+            }
+        }
+        private string _txtTimKiemLoai;
+        public string txtTimKiemLoai
+        {
+            get { return _txtTimKiemLoai; }
+            set
+            {
+                _txtTimKiemLoai = value;
+                OnPropertyChanged("txtTimKiemLoai");
+                listPBTimKiemLoai.Clear();
+                if (!string.IsNullOrWhiteSpace(_txtTimKiemLoai) && _listLoaiPhanBon.Count > 0)
+                {
+                    foreach (var PBTimKiem in _listLoaiPhanBon)
+                    {
+                        if (PBTimKiem.TenLoaiPhanBon.ToLower().Contains(_txtTimKiemLoai.Trim().ToLower()))
+                        {
+                            listPBTimKiemLoai.Add(PBTimKiem);
+                        }
+
+                    }
+                    if (_listLoaiPhanBon != null && _listLoaiPhanBon.Count > 0)
+                        _listLoaiPhanBon.Clear();
+                    if (listPBTimKiemLoai.Count > 0)
+                    {
+                        _listLoaiPhanBon = listPBTimKiemLoai;
+                        OnPropertyChanged("listLoaiPhanBon");
+                    }
+
                 }
                 else
                 {
@@ -405,16 +441,20 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
         void PhanBonTheoLoai()
         {
             phanBonCungLoai.Clear();
-            for(int i=0;i< TemplatePhanBonDataTable.Count;i++)
+            if(_selectedLoaiPhanBon!=null)
             {
-                if(_selectedLoaiPhanBon.IDLoaiPhanBon==TemplatePhanBonDataTable[i].LoaiPhanBon)
+                for (int i = 0; i < TemplatePhanBonDataTable.Count; i++)
                 {
-                    phanBonCungLoai.Add(TemplatePhanBonDataTable[i]);
-                    //MessageBox.Show(phanBonCungLoai.Count.ToString());
-                    OnPropertyChanged("PhanBonDataTable");
+                    if (_selectedLoaiPhanBon.IDLoaiPhanBon == TemplatePhanBonDataTable[i].LoaiPhanBon)
+                    {
+                        phanBonCungLoai.Add(TemplatePhanBonDataTable[i]);
+                        //MessageBox.Show(phanBonCungLoai.Count.ToString());
+                        OnPropertyChanged("PhanBonDataTable");
+                    }
                 }
+                Refesh();
             }
-            Refesh();
+            
 
 
         }
@@ -443,6 +483,7 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             }
             OnPropertyChanged("PhanBonDataTable");
             _listLoaiPhanBon = new ObservableCollection<LoaiPhanBon>( entities.LoaiPhanBons.ToList());
+            OnPropertyChanged("listLoaiPhanBon");
             entities.SaveChanges();
             TemplatePhanBonDataTable = new ObservableCollection<PhanBon>();
            for(int i=0;i<phanBonDataTable.Count;i++)

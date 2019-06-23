@@ -121,7 +121,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
 
             }
         }
-        private ObservableCollection<KhachHang> _ListKH;
+        private ObservableCollection<KhachHang> _ListKH = new ObservableCollection<KhachHang>();
         public ObservableCollection<KhachHang> ListKH
         {
             get { return _ListKH; }
@@ -164,6 +164,40 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                 OnPropertyChanged("ThanhTien");
             }
         }
+        private ObservableCollection<KhachHang> listTimKiemKH = new ObservableCollection<KhachHang>();
+        private string _txtTimKiemKH;
+        public string txtTimKiemKH
+        {
+            get { return _txtTimKiemKH; }
+            set
+            {
+                _txtTimKiemKH = value;
+                OnPropertyChanged("txtTimKiemKH");
+                
+                if(listTimKiemKH.Count>0)
+                    listTimKiemKH.Clear();
+                if(!string.IsNullOrWhiteSpace(_txtTimKiemKH)&&_ListKH.Count>0)
+                {
+                    foreach(var s in _ListKH)
+                    {
+                        if(s.TenKhachHang.Trim().ToLower().Contains(_txtTimKiemKH.Trim().ToLower()))
+                        {
+                            listTimKiemKH.Add(s);
+                        }
+                    }
+                    if(_ListKH!=null&&_ListKH.Count>0)
+                    {
+                        _ListKH.Clear();
+                    }
+                    _ListKH = listTimKiemKH;
+                    OnPropertyChanged("ListKH");
+                }
+                else
+                {
+                    FillDataKH();
+                }
+            }
+        }
         private string _KhuyenMai;
         public string PTKhuyenMai
         {
@@ -174,7 +208,7 @@ namespace QuanLyPhanPhanBon.ViewModel.BanViewModel
                 OnPropertyChanged("KhuyenMai");
             }
         }
-        private ObservableCollection<PhanBon> _ListPhanBon;
+        private ObservableCollection<PhanBon> _ListPhanBon = new ObservableCollection<PhanBon>();
       
         public ObservableCollection<PhanBon> ListPhanBon
         {

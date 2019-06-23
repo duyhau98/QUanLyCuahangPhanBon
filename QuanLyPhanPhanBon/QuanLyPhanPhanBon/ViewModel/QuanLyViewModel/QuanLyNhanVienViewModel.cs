@@ -49,6 +49,40 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
             themNhanVien.ShowDialog();
             Refresh();
         }
+        private ObservableCollection<NhanVien> listTimKiemNV = new ObservableCollection<NhanVien>();
+        private string _txtTimKiemNV;
+        public string txtTimKiemNV
+        {
+            get {return _txtTimKiemNV; }
+            set
+            {
+                _txtTimKiemNV = value;
+                OnPropertyChanged("txtTimKiemNV");
+                listTimKiemNV.Clear();
+                if (listTimKiemNV.Count > 0)
+                    listTimKiemNV.Clear();
+                if (!string.IsNullOrWhiteSpace(_txtTimKiemNV) && _ListNhanVien.Count > 0)
+                {
+                    foreach (var s in _ListNhanVien)
+                    {
+                        if (s.TenNhanVien.Trim().ToLower().Contains(_txtTimKiemNV.Trim().ToLower()))
+                        {
+                            listTimKiemNV.Add(s);
+                        }
+                    }
+                    if (_ListNhanVien != null && _ListNhanVien.Count > 0)
+                    {
+                        _ListNhanVien.Clear();
+                    }
+                    _ListNhanVien = listTimKiemNV;
+                    OnPropertyChanged("ListNhanVien");
+                }
+                else
+                {
+                    Refresh();
+                }
+            }
+        }
         private ObservableCollection<NhanVien> _ListNhanVien =  new ObservableCollection<NhanVien>();
         public ObservableCollection<NhanVien> ListNhanVien
         {

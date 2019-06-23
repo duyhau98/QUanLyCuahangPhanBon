@@ -39,6 +39,7 @@
 
         <TextBox Text="{Binding txtTimKiem,UpdateSourceTrigger=PropertyChanged}" FontSize="13" materialDesign:HintAssist.Hint="Search" Grid.Column="1"  Background="White" Width="200" Height="25" HorizontalAlignment="Right" BorderBrush="#89000000" Margin="0,2"></TextBox>
         <DataGrid
+            
              IsReadOnly="True"
             SelectedItem="{Binding SelectedPhanBon,Mode=Default}"
             HorizontalAlignment="Right"
@@ -161,7 +162,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <TextBox Text="{Binding txtTimKiem}" FontSize="13" materialDesign:HintAssist.Hint="Search" Background="White" Width="200" Height="25" HorizontalAlignment="Left" BorderBrush="#89000000" Margin="0,0,0,2"/>
+        <TextBox Text="{Binding txtTimKiemLoai,UpdateSourceTrigger=PropertyChanged}" FontSize="13" materialDesign:HintAssist.Hint="Search" Background="White" Width="200" Height="25" HorizontalAlignment="Left" BorderBrush="#89000000" Margin="0,0,0,2"/>
         <DataGrid
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Center"
