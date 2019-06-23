@@ -31,7 +31,7 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             AddPhanBon = new DelegateCommand(addPhanBon);
             //Refesh();
         }
-       
+        public ObservableCollection<PhanBon> listPBTimKiem = new ObservableCollection<PhanBon>();
         private ObservableCollection<LoaiPhanBon> _listLoaiPhanBon;
         private ObservableCollection<PhanBon> phanBonDataTable;
         private ObservableCollection<PhanBon> TemplatePhanBonDataTable;
@@ -51,6 +51,41 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
                 _AllSelected = value;
                 
                 OnPropertyChanged("AllSelected");
+            }
+        }
+        private string _txtTimKiem;
+        public string txtTimKiem
+        {
+            get { return _txtTimKiem; }
+            set
+            {
+                _txtTimKiem = value;
+                OnPropertyChanged("txtTimKiem");
+                listPBTimKiem.Clear();
+                if (!string.IsNullOrWhiteSpace(_txtTimKiem)&& phanBonDataTable.Count>0)
+                {
+                    foreach (var PBTimKiem in phanBonDataTable)
+                    {
+                        if (PBTimKiem.TenPhanBon.ToLower().Contains(_txtTimKiem.Trim().ToLower()))
+                        {
+                            listPBTimKiem.Add(PBTimKiem);
+                        }
+                        
+                    }
+                    if (phanBonDataTable != null && phanBonDataTable.Count > 0)
+                        phanBonDataTable.Clear();
+                    if(listPBTimKiem.Count>0)
+                    {
+                        phanBonDataTable = listPBTimKiem;
+                        OnPropertyChanged("PhanBonDataTable");
+                    }
+                  
+                }
+                else
+                {
+                    FillMyDataGrid();
+                }
+
             }
         }
         private bool _IsSelectedRow;
