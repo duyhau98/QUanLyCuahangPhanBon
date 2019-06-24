@@ -158,9 +158,10 @@
                 Chỉnh sửa
             </Button>
             <Button 
+                IsEnabled="{Binding isChinhSua}"
                  CommandParameter="{Binding ElementName=ChinhSua}"
                 Name="btnSave"
-                Command="{Binding SavePhanBon}"
+                Command="{Binding AddPhanBon}"
                 Width="150"
                 Style="{DynamicResource MaterialDesignRaisedButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth4" Grid.ColumnSpan="2" >

@@ -314,6 +314,9 @@
     <Resource Include="Image\noimage.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\1.jpg" />
+    <Content Include="Image\2.jfif" />
+    <Resource Include="Image\ViLuong.jpg" />
     <Content Include="Model\QuanLyPhanBon.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QuanLyPhanBon.edmx</DependentUpon>

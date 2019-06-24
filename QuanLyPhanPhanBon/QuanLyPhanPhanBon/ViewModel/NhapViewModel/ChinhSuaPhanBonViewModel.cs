@@ -21,7 +21,7 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
         {
            
             SaveImage = new DelegateCommand(SaveImageClick);
-           
+            EditPhanBon = new DelegateCommand(_EditPhanBon);
             AddPhanBon = new DelegateCommand(Save);
             ExitThisWindow = new DelegateCommand(Exit);
             FillComboBox();
@@ -136,7 +136,17 @@ namespace QuanLyPhanPhanBon.ViewModel.NhapViewModel
             get;
             private set;
         }
-      
+        public ICommand EditPhanBon
+        {
+            get;
+            private set;
+        }
+        public void _EditPhanBon(object parameter)
+        {
+            _isChinhSua = true;
+            OnPropertyChanged("isChinhSua");
+
+        }
         public ICommand AddPhanBon
         {
             get;
