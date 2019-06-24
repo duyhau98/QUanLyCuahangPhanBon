@@ -22,8 +22,8 @@ namespace QuanLyPhanPhanBon.View
         public Home()
         {
             InitializeComponent();
-           
-            
+
+         
 
         }
     }

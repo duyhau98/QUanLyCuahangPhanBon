@@ -42,7 +42,7 @@
                 <TextBlock FontSize="30">VNĐ</TextBlock>
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="10" Width="130" Command="{Binding No}" >Nợ</Button>
+                <Button Margin="10" Width="130" Command="{Binding No}" CommandParameter="{Binding ElementName=ThanToan}" >Nợ</Button>
                 <Button Margin="10" Width="130" Command="{Binding ThanhToan}" CommandParameter="{Binding ElementName=ThanToan}" >Thanh toán</Button>
                 <Button Margin="10" Width="130" Command="{Binding Exit}" CommandParameter="{Binding ElementName=ThanToan}">Thoát</Button>
             </StackPanel>

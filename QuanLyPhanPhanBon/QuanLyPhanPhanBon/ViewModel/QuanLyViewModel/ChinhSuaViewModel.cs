@@ -22,13 +22,19 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
                 _GioiTinh.Add(new KeyValuePair<string, int>("Nữ", 2));
                 EditNhanVien = new DelegateCommand(_EditNhanVien);
                 SaveNhanVien = new DelegateCommand(_SaveNhanVien);
+            Thoat = new DelegateCommand(_Thoat);
             RemoveNhanVien = new DelegateCommand(_RemoveNhanVien);
             
                 QuanLyPhanBonEntities quanLyPhanBonEntities = new QuanLyPhanBonEntities();
                 NhanVien nhanVien = quanLyPhanBonEntities.NhanViens.Find(IdNhanVien);
                 _TenNhanVien = nhanVien.TenNhanVien;
-                _SelectedGioiTinh = new KeyValuePair<string, int>(nhanVien.GioiTinh, 3);
-                _Luong = nhanVien.Luong.ToString();
+            if(nhanVien.GioiTinh=="Nam")
+                _SelectedGioiTinh = new KeyValuePair<string, int>(nhanVien.GioiTinh, 1);
+            else
+                _SelectedGioiTinh = new KeyValuePair<string, int>(nhanVien.GioiTinh, 2);
+            _DiaChi = nhanVien.DiaChi;
+            OnPropertyChanged("SelectedGioiTinh");
+            _Luong = nhanVien.Luong.ToString();
                 _SDT = nhanVien.SDT;
             TaiKhoan taiKhoan = quanLyPhanBonEntities.TaiKhoans.Where(b => b.IDNhanVien == IdNhanVien).FirstOrDefault();
                 if (taiKhoan!=null)
@@ -229,6 +235,16 @@ namespace QuanLyPhanPhanBon.ViewModel.QuanLyViewModel
             }
 
          
+        }
+        public ICommand Thoat
+        {
+            get;
+            private set;
+        }
+        public void _Thoat(object parameter)
+        {
+            var window = parameter as Window;
+            window.Close();
         }
         public ICommand SaveNhanVien
         {

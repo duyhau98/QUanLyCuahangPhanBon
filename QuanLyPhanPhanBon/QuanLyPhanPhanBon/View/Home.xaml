@@ -7,6 +7,7 @@
         xmlns:Nhap="clr-namespace:QuanLyPhanPhanBon.View.Nhap"
         xmlns:Ban="clr-namespace:QuanLyPhanPhanBon.View.Ban"
         xmlns:Thu="clr-namespace:QuanLyPhanPhanBon.View.Thu"
+        xmlns:HomeViewModel ="clr-namespace:QuanLyPhanPhanBon.ViewModel"
         xmlns:QuanLy="clr-namespace:QuanLyPhanPhanBon.View.QuanLy"
         xmlns:ThongKe="clr-namespace:QuanLyPhanPhanBon.View.ThongKe"
         mc:Ignorable="d"
@@ -16,7 +17,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      
        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz">
-   
+    <Window.DataContext>
+        <HomeViewModel:HomeViewModel/>
+    </Window.DataContext> 
     <Grid>
         <Grid>
             <Grid Height="50" VerticalAlignment="Top">
@@ -58,6 +61,8 @@
 
                 <Button
                 Grid.Column="2"
+                    Command="{Binding Logout}"
+                    CommandParameter="{Binding ElementName=Homem}"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
                 Background="{x:Null}" 
